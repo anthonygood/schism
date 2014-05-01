@@ -12,10 +12,11 @@ class TeamMember < ActiveRecord::Base
   end
   
   def self.pick_two
-    contestants = [self.random, self.random]
-	# go again if the same was chosen twice
-	pick_two unless contestants.uniq.length == contestants.length
-	contestants
+    self.all.sample(2)
+  end
+  
+  def is?(other_team_member)
+    self.id == other_team_member.id
   end
   
 end

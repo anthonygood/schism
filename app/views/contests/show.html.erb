@@ -1,4 +1,4 @@
-<h1>A Contest</h1>
+<h1><%= @question.text %></h1>
 
 <table>
 	<tr>
@@ -6,11 +6,25 @@
 		<th>Contestant B</th>
 	</tr>
 	<tr>
-		<td><%= @contestant_a.name %></td>
-		<td><%= @contestant_b.name %></td>
+	
+		<td><%= button_to @contestant_a.name, {
+		  :controller => "contests", 
+		  :action => "submit", 
+		  :method => "post", 
+		  :winner => @contestant_a.id,
+		  :loser => @contestant_b.id,
+		  :question => @question.id
+		} %></td>
+		
+		<td><%= button_to @contestant_b.name, {
+		  :controller => "contests", 
+		  :action => "submit", 
+		  :method => "post", 
+		  :winner => @contestant_b.id,
+		  :loser => @contestant_a.id,
+		  :question => @question.id
+		} %></td>
 	</tr>
 
 </table>
 
-<h2>Question</h2>
-<p><%= @question.text %></p>

@@ -5,6 +5,9 @@ class Contest < ActiveRecord::Base
   belongs_to :loser, {:class_name => 'TeamMember', :foreign_key => 'loser_id'}
   belongs_to :question
   
+  def to_s
+    "#{ self.question.text } Winner: #{ self.winner.name }. Loser: #{ self.loser.name }"
+  end
 
   
 end

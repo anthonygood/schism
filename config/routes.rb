@@ -1,6 +1,8 @@
 Schism::Application.routes.draw do
-  root :to => "contests#show", :as => "schism"
+  root :to => "contests#new", :as => "schism"
   post "/submit", :to => "contests#submit"
+  
+  resources :team_members, :contests, :questions
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

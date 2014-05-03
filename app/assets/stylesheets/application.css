@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
 */
+
+
+
+/* TABLES */
+table th.winner { background-color: rgba(160, 255, 160, 0.3); }
+table .winner {  background-color: rgba(200, 255, 200, 0.1); }
+table th.loser {background-color: rgba(255, 160, 160, 0.3); }
+table .loser { background-color: rgba(255, 200, 200, 0.1); }

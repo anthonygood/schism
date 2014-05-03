@@ -1,0 +1,31 @@
+<h1>The Questions</h1>
+
+<table class="table">
+	<tr>
+		<th>Question</th>
+		<th class="winner">Would</th>
+		<th class="loser">Wouldn't</th>
+	</tr>
+	
+	<% @questions.each do |q| %>
+	<tr>
+		<td> <%= q.text %></td>
+		<td class="winner"> <% q.winners.each_with_index do |winner, index|%>
+			<% if index == q.winners.length-1 %>
+				<%= link_to winner.name, team_member_path(winner.id) %>.
+			<% else %>
+				<%= link_to winner.name, team_member_path(winner.id) %>,
+			<% end %>
+		<% end %>
+		</td>
+		<td class="loser"> <%  q.losers.each_with_index do |loser, index| %>
+			<% if index == q.losers.length-1 %>
+				<%= link_to loser.name, team_member_path(loser.id) %>.
+			<% else %>
+				<%= link_to loser.name, team_member_path(loser.id) %>,
+			<% end %>
+		<% end %>
+		</td>
+	</tr>
+	<% end %>
+	

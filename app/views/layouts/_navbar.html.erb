@@ -1,0 +1,40 @@
+		<div class="col-md-6">
+			<ul class="nav nav-pills nav-justified">
+				<% if controller?('contests') && action?('new') %>
+					<li class="active">
+				<% else %>
+					<li>
+				<% end %>					
+				<%= link_to "Vote!", new_contest_path %></li>
+			
+			
+				<% if controller?('contests') && action?('index') %>
+					<li class="active">
+				<% else %>
+					<li>
+				<% end %>					
+				<%= link_to "Recent Contests", contests_path %></li>
+				
+				<% if controller?('team_members') %>
+					<li class="active">
+				<% else %>
+					<li>
+				<% end %>
+				<%= link_to "Quipper Team", team_members_path %></li>
+				
+				<% if false %>
+					<li class="active">
+				<% else %>
+					<li>
+				<% end %>
+				
+				
+				<% if controller?('questions') %>
+					<li class="active">
+				<% else %>
+					<li>
+				<% end %>
+				<%= link_to "Questions", questions_path %></li>
+			
+			</ul>
+		</div>

@@ -1,0 +1,15 @@
+<h1>The Team</h1>
+<p>You've reached the TeamMember index.</p> 
+
+<table class="table">
+	<tr>
+		<th>Team Member</th>
+		<th>Email</th>
+	</tr>
+	<% @team.each do |member| %>
+	<tr>
+		<td><%= link_to member.name, team_member_path(member.id) %></td>
+		<td><%= member.email %></td>
+	</tr>
+	<% end %>
+</table>

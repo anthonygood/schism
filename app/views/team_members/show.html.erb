@@ -1,0 +1,10 @@
+<h1><%= @team_member.name %>'s Page</h1>
+
+<table class="table">
+	<% @team_member.attributes.each do |attr, value| %>
+	<tr>
+		<td><%= attr %>:</td>
+		<td><%= value %></td>
+	</tr>
+	<% end %>
+</table>

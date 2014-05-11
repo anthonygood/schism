@@ -1,6 +1,6 @@
 <h1>The Questions</h1>
 
-<table class="table">
+<table class="table question_table">
 	<tr>
 		<th>Question</th>
 		<th class="winner">Would</th>
@@ -11,19 +11,11 @@
 	<tr>
 		<td> <%= q.text %></td>
 		<td class="winner"> <% q.winners.each_with_index do |winner, index|%>
-			<% if index == q.winners.length-1 %>
-				<%= link_to winner.name, team_member_path(winner.id) %>.
-			<% else %>
-				<%= link_to winner.name, team_member_path(winner.id) %>,
-			<% end %>
+				<%= link_to (image_tag(winner.image_path)), team_member_path(winner.id) %>
 		<% end %>
 		</td>
 		<td class="loser"> <%  q.losers.each_with_index do |loser, index| %>
-			<% if index == q.losers.length-1 %>
-				<%= link_to loser.name, team_member_path(loser.id) %>.
-			<% else %>
-				<%= link_to loser.name, team_member_path(loser.id) %>,
-			<% end %>
+			<%= link_to (image_tag(loser.image_path)), team_member_path(loser.id) %>
 		<% end %>
 		</td>
 	</tr>

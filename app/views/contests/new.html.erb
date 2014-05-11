@@ -1,9 +1,17 @@
-<h1><%= @question.text %></h1>
+<h1 class="text-center"><%= @question.text %></h1>
 
-<table class="table">
+<table class="table" id="contest_table">
 	<tr>
 		<th>Contestant A</th>
 		<th>Contestant B</th>
+	</tr>
+	<tr>
+		<td>
+			<%= image_tag( @contestant_a.image_path ) %>
+		</td>
+		<td>
+			<%= image_tag( @contestant_b.image_path ) %>
+		</td>
 	</tr>
 	<tr>
 	
@@ -14,7 +22,7 @@
 		  :winner => @contestant_a.id,
 		  :loser => @contestant_b.id,
 		  :question => @question.id
-		} %></td>
+		}, :class => "btn" %></td>
 		
 		<td><%= button_to @contestant_b.name, {
 		  :controller => "contests", 
@@ -23,7 +31,7 @@
 		  :winner => @contestant_b.id,
 		  :loser => @contestant_a.id,
 		  :question => @question.id
-		} %></td>
+		}, :class => "btn" %></td>
 	</tr>
 
 </table>

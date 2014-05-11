@@ -27,4 +27,8 @@ class TeamMember < ActiveRecord::Base
 	self.save
   end
   
+  def to_s
+    "#{self.name}, #{self.email}, #{self.image_path}"
+  end
+  
 end

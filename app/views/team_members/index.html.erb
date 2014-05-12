@@ -1,5 +1,5 @@
 <h1>The Team</h1>
-<p>You've reached the TeamMember index.</p> 
+<p>You've reached the TeamMember index. Well done, you.</p> 
 
 <table class="table">
 	<tr>
@@ -9,9 +9,9 @@
 	</tr>
 	<% @team.each do |member| %>
 	<tr>
-		<td><%= image_tag member.image_path %></td>
+		<td><%= link_to image_tag(member.image_path), team_member_path(member.id) %></td>
 		<td><%= link_to member.name, team_member_path(member.id) %></td>
-		<td><%= member.email %></td>
+		<td><%= mail_to member.email %></td>
 	</tr>
 	<% end %>
 </table>

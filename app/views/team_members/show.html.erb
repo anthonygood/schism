@@ -16,11 +16,11 @@
 			Email: 
 		</td>
 		<td>
-			<%= @team_member.email %>
+			<%= mail_to @team_member.email %>
 		</td>
 	</tr>
 	
-	<tr>
+	<tr >
 		<td>
 			Times in Contests: 
 		</td>
@@ -28,20 +28,24 @@
 			<%= @team_member.times_in_contests %>
 		</td>
 	</tr>
-
-<% if @last_defeat %>
 	
-	<tr class="loser">
-		<th colspan="2">Most Recent Defeat</th>
+	<tr class="winner">
+		<td>
+			Victories: 
+		</td>
+		<td>
+			<%= @team_member.wins.count %>
+		</td>
 	</tr>
 	
 	<tr class="loser">
-		<td><%= @last_defeat.question.text %></td>
-		<td><%= link_to image_tag(@last_defeat.winner.image_path), team_member_path( @last_defeat.winner.id) %></td>
-		
+		<td>
+			Defeats: 
+		</td>
+		<td>
+			<%= @team_member.losses.count %>
+		</td>
 	</tr>
-	
-<% end %>
 
 <% if @last_victory %>
 	
@@ -51,11 +55,26 @@
 	</tr>
 	
 	<tr class="winner">
-		<td><%= @last_victory.question.text %></td>
+		<td><%= @last_victory.question.text %><em>(<%= pretty_time(@last_victory.created_at) %>)</em></td>
 		<td><%= link_to image_tag(@last_victory.loser.image_path), team_member_path( @last_victory.loser.id) %></td>
 	</tr>
 	
 <% end %>
+
+<% if @last_defeat %>
+	
+	<tr class="loser">
+		<th colspan="2">Most Recent Defeat</th>
+	</tr>
+	
+	<tr class="loser">
+		<td><%= @last_defeat.question.text %><em>(<%= pretty_time(@last_defeat.created_at) %>)</em></td>
+		<td><%= link_to image_tag(@last_defeat.winner.image_path), team_member_path( @last_defeat.winner.id) %></td>
+		
+	</tr>
+	
+<% end %>
+
 </table>
 
 

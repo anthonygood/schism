@@ -1,5 +1,5 @@
 class TeamMembersController < ApplicationController
-  require 'bcrypt'
+  include BCrypt
   
   def index
     @team = TeamMember.all
@@ -18,12 +18,33 @@ class TeamMembersController < ApplicationController
   def check_user
   	email = params[:email] << "@quipper.com"
 	@user = TeamMember.find_by_email( email )
+	submitted_password = params[:password]
 	
-	puts "**********************************************************************"
-	puts @user.to_s
+	if submitted_password.empty?
+	  flash[:alert] = "Enter a password, you crazy person."
+	  return redirect_to :back
+	end
 	
-	if @user	  
-	  flash[:notice] = "User #{@user.name} found for that email address."
+	# if the entered email address matches a user ...
+	if @user
+      # check if user has already registered (password exists)
+      if @user.password_hash
+	    # check their password is correct
+		if Password.new( @user.password_hash) == submitted_password 
+		
+        flash[:notice] = "Password matches, logging in..."
+		return redirect_to :back
+		else
+		flash[:alert] = "Wrong password!"
+		return redirect_to :back
+		end
+      else
+	    # team_member found, but not registered yet
+		# register their account
+		hashed_password = Password.create( submitted_password )
+		@user.update_attribute( :password_hash, hashed_password )
+		flash[:notice] = "Account created!"
+      end		
 	else 
 	  flash[:alert] = "No user was found with that email address."
 	end

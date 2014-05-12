@@ -7,4 +7,8 @@ module ApplicationHelper
   def action?(*actions)
     actions.include? params[:action]
   end
+  
+  def appellation
+    ["Quipper Colleague","Quiz Stalwart","Education Apostle","Distributor of Wisdom","Courier of Knowledge","Knowledge Expert","Thinker of Big Ideas","Quipper Footsoldier", "Learner", "Professor of Truth and Light", "Quasher of Ignorance"].sample(1)[0]
+  end
 end

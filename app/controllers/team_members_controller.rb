@@ -7,6 +7,8 @@ class TeamMembersController < ApplicationController
   
   def show
     @team_member = TeamMember.find(params[:id])
+	@last_victory = @team_member.wins[-1]
+	@last_defeat = @team_member.losses[-1]
   end
   
   def sign_in	
@@ -15,14 +17,12 @@ class TeamMembersController < ApplicationController
   
   def check_user
   	email = params[:email] << "@quipper.com"
-	
 	@user = TeamMember.find_by_email( email )
 	
-		  puts "**********************************************************************"
-	  puts @user.to_s
+	puts "**********************************************************************"
+	puts @user.to_s
 	
-	if @user
-	  
+	if @user	  
 	  flash[:notice] = "User #{@user.name} found for that email address."
 	else 
 	  flash[:alert] = "No user was found with that email address."
@@ -33,6 +33,7 @@ class TeamMembersController < ApplicationController
   end
   
   
+  
   private
   
   def log_in
@@ -41,5 +42,6 @@ class TeamMembersController < ApplicationController
   
   def register
   end
+  
   
 end

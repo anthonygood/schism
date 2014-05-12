@@ -15,10 +15,10 @@
 .nav{ border-bottom: 1px solid black; }
 
 /* TABLES */
-table th.winner { background-color: rgba(160, 255, 160, 0.3); }
-table .winner {  background-color: rgba(200, 255, 200, 0.1); }
-table th.loser {background-color: rgba(255, 160, 160, 0.3); }
-table .loser { background-color: rgba(255, 200, 200, 0.1); }
+table th.winner { background-color: rgba(160, 255, 160, 0.4); }
+table .winner {  background-color: rgba(200, 255, 200, 0.2); }
+table th.loser {background-color: rgba(255, 160, 160, 0.4); }
+table .loser { background-color: rgba(255, 200, 200, 0.2); }
 
 .question_table img { width: 60px; border-radius: 30px; }
 
@@ -29,7 +29,10 @@ table .loser { background-color: rgba(255, 200, 200, 0.1); }
 #contest_table  th, #contest_table td {text-align: center;}
 #contest_table img { width: 150px; border-radius: 100px; border: 20px solid white; box-shadow: 1px 1px 3px black; opacity: 1; }
 
-table img {opacity: 0.6;  }
+#profile_table td { width: 50%; }
+
+
+table img {opacity: 0.6; border-radius: 50%;  }
 table img:hover { opacity: 1; }
 
 /* INPUTS */
@@ -37,3 +40,7 @@ input[type="text"].my-input, input[type="password"].my-input { font-size: 25px; 
 
 #email { text-align: right; width: 120px;  }
 .quipper { font-size: 24px; padding-left: 1px; padding-bottom: 2px;}
+
+/* PROFILE */
+#profile_portrait { width: 125px; float: left; padding-right: 20px; }
+#profile_heading { line-height: 25px; padding-top: 50px; }

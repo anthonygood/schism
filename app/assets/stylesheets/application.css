@@ -13,7 +13,22 @@
 */
 
 /* NAVBAR */
-.nav img { width: 46px }
+#my_nav { 
+	min-height: 40px; 
+	background-color: rgb(20, 190, 240);
+	}
+#my_nav.navbar.navbar-default.navbar-static-top a{
+	color: white;
+	text-shadow: 1px 1px 1px rgb(20, 150, 200);
+}
+
+#my_nav  .nav.nav-bar li.active a {
+	background-color: transparent;
+	box-shadow: inset 0 2px 15px rgba(20, 150, 200, 0.8);
+}
+	
+.nav img { width: 40px; opacity: 0.9; }
+.nav img:hover { width: 40px; opacity: 1; }
 .nav.navbar-right li a.portrait { padding: 0; }
 
 /* #my_container{ height: 45px; box-shadow: 0 3px 6px -6px rgb(100, 100, 100); }

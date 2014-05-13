@@ -18,6 +18,10 @@ module ApplicationHelper
 	"#{day}, at #{time}"
   end
   
+  def get_name(id)
+    TeamMember.find(id).name
+  end
+  
   private
   def get_day(time)
     if time.to_date == Date.today

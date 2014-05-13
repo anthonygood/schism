@@ -15,6 +15,7 @@ class TeamMembersController < ApplicationController
 
   end
   
+
   def check_user
   	email = params[:email] << "@quipper.com"
 	@user = TeamMember.find_by_email( email )
@@ -32,27 +33,33 @@ class TeamMembersController < ApplicationController
 	    # check their password is correct
 		if Password.new( @user.password_hash) == submitted_password 
 		
-        flash[:notice] = "Password matches, logging in..."
-		return redirect_to :back
+          flash[:notice] = "You've logged in as #{@user.name}"
+		  session[:team_member_id] = @user.id
+		  return redirect_to '/contests/new'
 		else
-		flash[:alert] = "Wrong password!"
-		return redirect_to :back
+		  flash[:alert] = "Wrong password!"
+		  return redirect_to :back
 		end
       else
 	    # team_member found, but not registered yet
 		# register their account
 		hashed_password = Password.create( submitted_password )
 		@user.update_attribute( :password_hash, hashed_password )
-		flash[:notice] = "Account created!"
+		flash[:notice] = "Account created for #{@user.name}!"
+		session[:team_member_id] = @user.id
+		redirect_to '/contests/new'
       end		
 	else 
 	  flash[:alert] = "No user was found with that email address."
+	  redirect_to "/sign-in"
 	end
-	
-	redirect_to "/sign-in"
   
   end
-  
+
+  def logout
+    session[:team_member_id] = nil
+	redirect_to '/sign-in'
+  end
   
   
   private

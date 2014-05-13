@@ -1,0 +1,6 @@
+<% if alert %>
+	<p class="alert alert-danger"><%= flash[:alert].join(" <br> ").html_safe %></p>
+<% end %>
+<% if notice %>
+	<p class="alert"><%= flash[:notice] %></p>
+<% end %>

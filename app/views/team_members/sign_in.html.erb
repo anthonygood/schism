@@ -1,13 +1,19 @@
-<h1>Register or sign in.</h1>
-<div class="alert-danger alert-dismissable"><%= alert %></div>
-<div class="alert-notice"><%= notice %></div>
-
-
-<form method="post" action="check_user">
-	<label for="email">Email address:</label>
-	<input class="my-input" type="text" name="email" id="email" placeholder="you"><span class="quipper">@quipper.com</span>
-	<label for="password">Password:</label>
-	<input class="my-input" type="password" name="password" id="password">
-	<br/>
-	<input type="submit" class="btn" value="Sign in!">
-</form>
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+	<h1 class="text-center">Register or sign in.</h1>
+	<%= render '/shared/alerts' %>
+	<form id="sign-in-form" role="form" method="post" action="check_user">
+		<div class="text-center">		
+			<input class="my-input" type="text" name="email" id="email" placeholder="you"><label for="email"><span class="quipper">@quipper.com</span></label>
+		</div>
+		<div class=" form-group text-center">
+			<label for="password"><spam class="quipper">Password:</span></label>
+			<input class="my-input" type="password" name="password" id="password">
+		</div>
+		<br/>
+		<div class="text-center"><input type="submit" class="btn sign-in" value="Sign in!"></div>
+	</form>
+</div>
+<div class="col-md-3"></div>
+</div>

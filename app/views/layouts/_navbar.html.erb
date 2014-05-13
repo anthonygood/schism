@@ -1,12 +1,16 @@
-			<ul class="nav nav-pills nav-justified">
+
+<div class="navbar navbar-default navbar-static-top">
+	<div class="container">
+		<div class="navbar-collapse collapse">
+			<ul class="nav nav-bar">
 				<% if controller?('contests') && action?('new') %>
 					<li class="active">
 				<% else %>
 					<li>
 				<% end %>					
 				<%= link_to "Vote!", new_contest_path %></li>
-			
-			
+
+
 				<% if controller?('contests') && action?('index') %>
 					<li class="active">
 				<% else %>
@@ -20,32 +24,30 @@
 					<li>
 				<% end %>
 				<%= link_to "Quipper Team", team_members_path %></li>
-				
-				<% if false %>
-					<li class="active">
-				<% else %>
-					<li>
-				<% end %>
-				
-				
+	
 				<% if controller?('questions') %>
 					<li class="active">
 				<% else %>
 					<li>
 				<% end %>
-				<%= link_to "Questions", questions_path %></li>
-				
-				<% if session[:team_member_id] %>
-					<% if controller?('team_members') && action?('show') %>
+				<%= link_to "Questions", questions_path %>
+					</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">	
+				<% if logged_in? %>
+					<% if controller?('team_members') && action?('show') && id?(current_user.id) %>
 						<li class="active">
 					<% else %>
 						<li>
 					<% end %>
 					
-					<%= link_to "#{get_name session[:team_member_id]}", team_member_path(session[:team_member_id]) %></li>
+					<%= link_to (image_tag(current_user.image_path)), team_member_path(current_user.id), :class => "portrait" %></li>
 					<li><%= link_to "Log-out", logout_path %></li>
 				<% else %>
 					<li><%= link_to "Log in", login_path %></li>
 				<% end %>
-			
 			</ul>
+		</div>
+		</div>
+	</div>
+</div>

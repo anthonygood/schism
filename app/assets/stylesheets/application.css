@@ -12,8 +12,17 @@
  *= require_tree .
 */
 
-.nav{ box-shadow: 0 3px 6px -6px rgb(100, 100, 100); }
+/* NAVBAR */
+.nav img { width: 46px }
+.nav.navbar-right li a.portrait { padding: 0; }
 
+/* #my_container{ height: 45px; box-shadow: 0 3px 6px -6px rgb(100, 100, 100); }
+#my_container li a {height: 30px; margin-top: 0; line-height: 30px;} */
+@font-face {
+  font-family: 'Chunkfive';    
+  src: url('Chunkfive.otf');
+  font-weight: normal;
+  font-style: normal;}
 /* TABLES */
 table th.winner { background-color: rgba(160, 255, 160, 0.4); }
 table .winner {  background-color: rgba(200, 255, 200, 0.2); }
@@ -27,6 +36,8 @@ table .neutral { background-color: rgba(230, 230, 230, 0.2); }
 .table.recent_table td { vertical-align: middle; }
 .recent_table img { width: 100px; border-radius: 50px; }
 
+.container h1 { font-family: 'Chunkfive', arial, san-serif; }
+.btn.sign-in { font-family: 'Chunkfive', arial, san-serif; font-size: 18px; }
 
 #contest_table  th, #contest_table td {text-align: center;}
 #contest_table img { width: 150px; border-radius: 100px; border: 20px solid white; box-shadow: 1px 1px 10px rgb(100, 100, 100); opacity: 1; }
@@ -38,11 +49,27 @@ table img {opacity: 0.6; border-radius: 50%;  }
 table img:hover { opacity: 1; }
 
 /* INPUTS */
-input[type="text"].my-input, input[type="password"].my-input { font-size: 25px; color: rgb(150,150,150); height: 28px; width: 280px; border: none; color: rgb(100,100,100); line-height: 28px; }
+input[type="text"].my-input, input[type="password"].my-input { font-size: 25px; color: rgb(150,150,150); height: 32px; width: 150px; border: none; color: rgb(100,100,100); font-size: 28px; line-height: 25px; border-radius: 0; box-shadow: none; height: 32px; padding: 0; background-color: rgb(240,240,240);}
 
-#email { text-align: right; width: 120px;  }
-.quipper { font-size: 24px; padding-left: 1px; padding-bottom: 2px;}
+/*border-bottom: 4px solid rgb(200, 200, 200); */
+
+#sign-in-form { margin-top: 65px; }
+#email { 
+	text-align: right; 
+	width: 200px; 
+	font-size: 28px;
+	font-weight: 100;
+	height: 38px;
+	display: inline-block;
+	vertical-align: middle;}
+
+#email::-webkit-input-placeholder {
+	line-height: 29px;
+}
+
+#password {width: 250px; }
+.quipper { font-size: 28px; font-weight: 100;}
 
 /* PROFILE */
 #profile_portrait { width: 125px; float: left; padding-right: 20px; }
-#profile_heading { line-height: 25px; padding-top: 50px; }
+#profile_heading { line-height: 30px; padding-top: 50px; }

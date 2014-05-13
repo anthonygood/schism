@@ -8,11 +8,16 @@ module ApplicationHelper
     actions.include? params[:action]
   end
   
+  def id?(id)
+    params[:id].to_i == id
+  end
+  
   def appellation
     ["Quipper Colleague","Quiz Stalwart","Education Apostle","Distributor of Wisdom","Courier of Knowledge","Knowledge Expert","Thinker of Big Ideas","Quipper Footsoldier", "Learner", "Professor of Truth and Light", "Quasher of Ignorance"].sample(1)[0]
   end
   
   def pretty_time(time)
+    time = time.localtime
     day = get_day(time)
     time = time.strftime("%l:%M%P")
 	"#{day}, at #{time}"

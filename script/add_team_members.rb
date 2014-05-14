@@ -35,3 +35,6 @@ names.each do |person|
   email = person.downcase.split[0] << "@quipper.com"
   TeamMember.new( :name => person, :email => email ).save
 end
+
+TeamMember.find_by_name("Masatomo Nakano").update_attribute(:email, "tomo@quipper.com")
+TeamMember.find_by_name("Masayuki Watanabe").update_attribute(:email, "masa@quipper.com")

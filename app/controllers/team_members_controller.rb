@@ -37,7 +37,7 @@ class TeamMembersController < ApplicationController
 		  session[:team_member_id] = @user.id
 		  return redirect_to '/contests/new'
 		else
-		  flash[:alert] = "Wrong password!"
+		  flash[:alert] = "Email is registered, but not with that password."
 		  return redirect_to :back
 		end
       else
@@ -50,7 +50,7 @@ class TeamMembersController < ApplicationController
 		redirect_to '/contests/new'
       end		
 	else 
-	  flash[:alert] = "No user was found with that email address."
+	  flash[:alert] = "No user was found with that email address. Are you sure you work for Quipper?"
 	  redirect_to "/sign-in"
 	end
   

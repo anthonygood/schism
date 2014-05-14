@@ -1,3 +1,18 @@
 // Place all the styles related to the contests controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.medallion {
+	position: relative;
+	-webkit-transition: -webkit-transform 2s;
+	transition: transform 2s;
+}
+
+.rotate-left {
+	-webkit-transform: rotate(-1440deg);
+	transform: rotate(-1440deg);
+}
+
+.rotate-right {
+	-webkit-transform: rotate(1440deg);
+	transform: rotate(1440deg);
+}

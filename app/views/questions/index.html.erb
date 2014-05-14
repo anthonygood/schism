@@ -9,12 +9,12 @@
 	
 	<% @questions.each do |q| %>
 	<tr>
-		<td> <%= q.text %></td>
-		<td class="winner"> <% q.winners.each_with_index do |winner, index|%>
+		<td> <%= link_to q.text, question_path(q.id) %></td>
+		<td class="winner"> <% q.winners.each do |winner| %>
 				<%= link_to (image_tag(winner.image_path)), team_member_path(winner.id) %>
 		<% end %>
 		</td>
-		<td class="loser"> <%  q.losers.each_with_index do |loser, index| %>
+		<td class="loser"> <%  q.losers.each do |loser| %>
 			<%= link_to (image_tag(loser.image_path)), team_member_path(loser.id) %>
 		<% end %>
 		</td>

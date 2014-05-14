@@ -1,0 +1,40 @@
+<h1><%= @question.text %></h1>
+
+<% if @question.count < 1 %>
+<p>There are no contests for this question, yet!</p>
+<% else %>
+<table class="table">
+	<tr>
+		<th class="winner">Winners</th>
+		<th class="loser">Losers</th>
+	</tr>
+	
+	<tr>
+	<td class="winner">
+		<% @question.winners.each do |winner| %>
+			<%= link_to (image_tag(winner.image_path)), team_member_path(winner.id) %>
+		<% end %>
+	</td>
+	<td class="loser">
+		<% @question.losers.each do |loser| %>
+		
+			<%= link_to (image_tag(loser.image_path)), team_member_path(loser.id) %>
+		
+		<% end %>
+	</td>
+	</tr>
+<% end %>
+</table>
+
+<h2>As it happened...</h2>
+<table id="recent-table" class="table">
+	
+	<% @question.contests.reverse.each do |contest| %>
+		<tr>
+			<td><%= pretty_time contest.created_at %></td>
+			<td class="winner"><%= link_to (image_tag(contest.winner.image_path)), team_member_path(contest.winner.id) %></td>
+			<td class="loser"><%= link_to (image_tag(contest.loser.image_path)), team_member_path(contest.loser.id) %></td>
+		</tr>
+	<% end %>
+
+</table>

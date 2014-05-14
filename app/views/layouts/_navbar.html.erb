@@ -25,7 +25,7 @@
 				<% end %>
 				<%= link_to "Quipper Team", team_members_path %></li>
 	
-				<% if controller?('questions') %>
+				<% if controller?('questions') && action?('index') %>
 					<li class="active">
 				<% else %>
 					<li>

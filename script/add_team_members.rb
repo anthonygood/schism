@@ -29,6 +29,8 @@ names = %w[
 	Yuta\ Funase
 	Keisuke\ Kawase
 	Bianca\ Esmero
+	Satoru\ Tanabe
+	Kati\ Vorobjova
 ]
 
 names.each do |person|

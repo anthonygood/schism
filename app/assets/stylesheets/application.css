@@ -50,11 +50,13 @@ table .neutral { background-color: rgba(230, 230, 230, 0.2); }
 
 .question_table img { width: 60px; border-radius: 30px; }
 
-#recent_table td { vertical-align: middle;}
-#recent_table .winner, #recent_table .loser { text-align: center; }
-#recent_table img { width: 100px; border-radius: 50px; }
+html body div.container table.table#recent-table > tbody > tr > td { vertical-align: middle; }
+.container .table#recent-table td.winner, #recent-table td.loser { text-align: center; }
+.container .table#recent-table img { width: 100px; border-radius: 50px; }
 
-.container h1 { font-family: 'Chunkfive', arial, san-serif; }
+.container h1, .container h2 { font-family: 'Chunkfive', arial, san-serif; }
+.container h1 {font-size: 42px;}
+.container h2 { font-size: 28px; color: rgb(200,200,200); }
 .btn.sign-in { font-family: 'Chunkfive', arial, san-serif; font-size: 18px; color: white; background-color: rgb(20, 190, 240); text-shadow: 1px 1px 1px rgb(10, 160, 200);}
 .btn.sign-in:hover { background-color: rgb(10, 140, 200); color: rgb(240,240,240); }
 

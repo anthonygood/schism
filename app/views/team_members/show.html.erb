@@ -56,7 +56,7 @@
 	</tr>
 	
 	<tr class="winner">
-		<td><%= @last_victory.question.text %><em>(<%= pretty_time(@last_victory.created_at) %>)</em></td>
+		<td><%= link_to @last_victory.question.text, question_path(@last_victory.question.id) %><em>(<%= pretty_time(@last_victory.created_at) %>)</em></td>
 		<td><%= link_to image_tag(@last_victory.loser.image_path), team_member_path( @last_victory.loser.id) %></td>
 	</tr>
 	
@@ -69,7 +69,7 @@
 	</tr>
 	
 	<tr class="loser">
-		<td><%= @last_defeat.question.text %><em>(<%= pretty_time(@last_defeat.created_at) %>)</em></td>
+		<td><%= link_to @last_defeat.question.text, question_path(@last_defeat.question.id) %><em>(<%= pretty_time(@last_defeat.created_at) %>)</em></td>
 		<td><%= link_to image_tag(@last_defeat.winner.image_path), team_member_path( @last_defeat.winner.id) %></td>
 		
 	</tr>

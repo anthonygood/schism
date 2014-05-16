@@ -22,7 +22,7 @@
 	text-shadow: 1px 1px 1px rgb(20, 150, 200);
 }
 
-#my_nav  .nav.nav-bar li.active a {
+#my_nav  .nav li.active a {
 	background-color: transparent;
 	box-shadow: inset 0 2px 15px rgba(20, 150, 200, 0.8);
 }
@@ -32,7 +32,7 @@
 .nav.navbar-right li a.portrait { padding: 0; }
 
 /* HEADINGS */
-h1.blue { color: rgba(20,180,230, 1);}
+.blue, h1 span { color: rgba(20,180,230, 1);}
 /* #my_container{ height: 45px; box-shadow: 0 3px 6px -6px rgb(100, 100, 100); }
 #my_container li a {height: 30px; margin-top: 0; line-height: 30px;} */
 @font-face {
@@ -45,23 +45,24 @@ table th.winner { background-color: rgba(20, 180, 240, 0.4); }
 table .winner {  background-color: rgba(20, 180, 240, 0.2); }
 table th.loser {background-color: rgba(255, 120, 170, 0.4); }
 table .loser { background-color: rgba(255, 120, 170, 0.2); }
+table .loser a { color: rgb(230, 40, 100); }
 table th.neutral { background-color: rgba(230, 230, 230, 0.4); }
 table .neutral { background-color: rgba(230, 230, 230, 0.2); }
+table td.text-center { text-align: center;}
 
-.question_table img { width: 60px; border-radius: 30px; }
+.small img { width: 60px; border-radius: 30px; min-width: 60px; height: 60px; }
 
-html body div.container table.table#recent-table > tbody > tr > td { vertical-align: middle; }
-.container .table#recent-table td.winner, #recent-table td.loser { text-align: center; }
-.container .table#recent-table img { width: 100px; border-radius: 50px; }
+#recent-table > tbody > tr > td { vertical-align: middle; }
+#recent-table td.winner, #recent-table td.loser { text-align: center; }
+#recent-table img { width: 100px; height: 100px; border-radius: 50px; }
 
 .container h1, .container h2 { font-family: 'Chunkfive', arial, san-serif; }
 .container h1 {font-size: 42px;}
-.container h2 { font-size: 28px; color: rgb(200,200,200); }
 .btn.sign-in { font-family: 'Chunkfive', arial, san-serif; font-size: 18px; color: white; background-color: rgb(20, 190, 240); text-shadow: 1px 1px 1px rgb(10, 160, 200);}
 .btn.sign-in:hover { background-color: rgb(10, 140, 200); color: rgb(240,240,240); }
 
-#contest_table  th, #contest_table td {text-align: center;}
-#contest_table img { width: 150px; border-radius: 100px; border: 20px solid white; box-shadow: 1px 1px 10px rgb(100, 100, 100); opacity: 1; }
+#contest_table  td, #contest_table th {text-align: center;}
+.medallion { width: 150px; height: 150px; border-radius: 100px; border: 20px solid white; box-shadow: 1px 1px 10px rgb(100, 100, 100); opacity: 1; }
 
 #profile_table td { width: 50%; }
 
@@ -96,5 +97,6 @@ input[type="text"].my-input, input[type="password"].my-input { font-size: 25px; 
 .quipper { font-size: 28px; font-weight: 100; color: rgb(200, 200, 230)}
 
 /* PROFILE */
-#profile_portrait { width: 125px; float: left; padding-right: 20px; }
-#profile_heading { line-height: 30px; padding-top: 50px; }
+#profile_portrait { width: 125px; }
+#profile_heading { line-height: 34px; position: absolute; left: 130px; bottom: -14px; }
+.team-masthead { position: relative; }

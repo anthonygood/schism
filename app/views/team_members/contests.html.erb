@@ -1,0 +1,22 @@
+<%= render '/shared/masthead' %>
+
+<table id="team-member-table" class="table">
+	<tr>
+		<th colspan="2"></th>
+	</tr>
+
+	<% @contests.each do |contest| %>
+		<% if @team_member.winner?(contest) %>
+			<tr class="winner">
+		<% else %>
+			<tr class="loser">
+		<% end %>
+			<td>
+				<%= link_to contest.question.text, question_path(contest.question.id) %> <em> (<%= pretty_time contest.created_at %>)</em>
+			</td>
+			<td class="small">
+				<%= portrait_link( @team_member.opponent(contest) ) %>
+			</td>
+		</tr>
+	<% end %>
+</table>

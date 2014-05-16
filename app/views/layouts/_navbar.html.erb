@@ -44,7 +44,12 @@
 					<%= link_to (image_tag(current_user.image_path)), team_member_path(current_user.id), :class => "portrait" %></li>
 					<li><%= link_to "Log-out", logout_path %></li>
 				<% else %>
-					<li><%= link_to "Log in", login_path %></li>
+					<% if action?("sign_in") %>
+						<li class="active">
+					<% else %>
+						<li>
+					<% end %>	
+					<%= link_to "Log in", login_path %></li>
 				<% end %>
 			</ul>
 		</div>

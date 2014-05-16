@@ -2,7 +2,7 @@ class ContestsController < ApplicationController
   
   def new
     unless session[:team_member_id]
-	  flash[:notice] = "You need to sign-in to vote."
+	  flash[:notice] = "You need to sign in to vote."
 	  return redirect_to '/sign-in'
 	end
     # pick a random question

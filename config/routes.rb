@@ -5,9 +5,13 @@ Schism::Application.routes.draw do
   get "/login", "/register", "/sign-in", :to => "team_members#sign_in"
   post "/check_user", :to => "team_members#check_user"
   
+  
   get "/logout", :to => "team_members#logout"
   
-  resources :team_members, :contests, :questions
+  resources :team_members, :path => "team"
+  resources  :contests, :questions
+  
+  get "/team/:id/contests", :to => "team_members#contests", :as => "user_contests"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

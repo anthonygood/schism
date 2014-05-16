@@ -1,3 +1,14 @@
 // Place all the styles related to the team_members controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#team-member-table td {
+
+}
+#team-member-table td:nth-child(2) {
+
+	width: 30%;
+}
+#profile-table td {
+	width: 50%;
+}

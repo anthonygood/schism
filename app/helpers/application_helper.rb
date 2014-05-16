@@ -12,8 +12,9 @@ module ApplicationHelper
     params[:id].to_i == id
   end
   
-  def appellation
-    ["Quipper Colleague","Quiz Stalwart","Education Apostle","Distributor of Wisdom","Courier of Knowledge","Knowledge Expert","Thinker of Big Ideas","Quipper Footsoldier", "Learner", "Professor of Truth and Light", "Quasher of Ignorance"].sample(1)[0]
+  
+  def portrait_link(team_member)
+    link_to( image_tag(team_member.image_path), team_member_path(team_member.id) )
   end
   
   def pretty_time(time)

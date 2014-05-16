@@ -2,17 +2,34 @@ class TeamMembersController < ApplicationController
   include BCrypt
   
   def index
+	unless logged_in?
+      flash[:notice] = "You need to sign in to see the Quipper team."
+	  return redirect_to "/sign-in"
+	end
     @team = TeamMember.all
   end
   
   def show
     @team_member = TeamMember.find(params[:id])
-	@last_victory = @team_member.wins[-1]
-	@last_defeat = @team_member.losses[-1]
+  	unless logged_in?
+      flash[:notice] = "You need to sign in to view #{@team_member.firstname}'s profile."
+	  return redirect_to "/sign-in"
+	end
+	
+	@last_victory = @team_member.wins.last
+	@last_defeat = @team_member.losses.last
+	@contests = @team_member.contests
+	@heading = appellation
   end
   
   def sign_in	
 
+  end
+  
+  def contests
+    @team_member = TeamMember.find( params[:id] )
+	@contests = @team_member.contests
+	@heading = "Contests"
   end
   
 
@@ -64,11 +81,8 @@ class TeamMembersController < ApplicationController
   
   private
   
-  def log_in
-  
-  end
-  
-  def register
+  def appellation
+    ["Quipper Colleague","Quiz Stalwart","Education Apostle","Distributor of Wisdom","Courier of Knowledge","Knowledge Expert","Thinker of Big Ideas","Quipper Footsoldier", "Learner", "Professor of Truth and Light", "Quasher of Ignorance"].sample(1)[0]
   end
   
   

@@ -7,6 +7,11 @@ class TeamMembersController < ApplicationController
 	  return redirect_to "/sign-in"
 	end
     @team = TeamMember.all
+	@biggest_winner = TeamMember.with_most(@team, :wins)
+	@biggest_loser = TeamMember.with_most(@team, :losses)
+	@best_streaker = TeamMember.biggest_streaker(@team, :wins)
+	@worst_streaker = TeamMember.biggest_streaker(@team, :losses)
+
   end
   
   def show
@@ -20,6 +25,8 @@ class TeamMembersController < ApplicationController
 	@last_defeat = @team_member.losses.last
 	@contests = @team_member.contests
 	@heading = appellation
+	@likeliest = format_likelihoods( @team_member.most_likely_to )
+	@unlikeliest = format_likelihoods( @team_member.least_likely_to )
   end
   
   def sign_in	
@@ -83,6 +90,14 @@ class TeamMembersController < ApplicationController
   
   def appellation
     ["Quipper Colleague","Quiz Stalwart","Education Apostle","Distributor of Wisdom","Courier of Knowledge","Knowledge Expert","Thinker of Big Ideas","Quipper Footsoldier", "Learner", "Professor of Truth and Light", "Quasher of Ignorance"].sample(1)[0]
+  end
+  
+  # receives a 2D array, should return pretty 1D array
+  def format_likelihoods(arr)
+    pretty = arr.map do |question, likelihood|
+	  [question.sub("Who would ", "").sub("?","").humanize, likelihood]
+	end
+	pretty
   end
   
   

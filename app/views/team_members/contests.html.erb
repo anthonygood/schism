@@ -5,7 +5,7 @@
 		<th colspan="2"></th>
 	</tr>
 
-	<% @contests.each do |contest| %>
+	<% @contests.reverse.each do |contest| %>
 		<% if @team_member.winner?(contest) %>
 			<tr class="winner">
 		<% else %>

@@ -1,4 +1,20 @@
-<h1>Recent Contests</h1>
+<h1>Recent Contests,
+	<span>
+
+		<%= @range %>
+	</spam>
+</h1>
+<h2 class="blue">
+<% unless (@x - (@records) < 1) %>
+	<%= link_to "< previous", contests_path( :range => prev_range ) %>
+<% end %>
+
+<% unless ( @contests.last.id == @first_record ) %>
+	<%= link_to "next >", contests_path( :range => next_range ) %>
+	</p>
+<% end %>
+</h2>
+
 <table class="table" id="recent-table">
 	<tr>
 		<th >Question</th>
@@ -8,7 +24,7 @@
 	
 	<% @contests.each do |contest| %>
 	<tr>
-		<td><%= link_to contest.question.text, question_path(contest.question.id) %><em>(<%= pretty_time(contest.created_at) %>)</em></td>
+		<td><%= link_to contest.question.text, question_path(contest.question.id) %><br><em>(<%= pretty_time(contest.created_at) %>)</em></td>
 		<td class="winner"> <%= link_to (image_tag(contest.winner.image_path)), team_member_path(contest.winner.id) %></td>
 		
 		<td class="loser"> <%= link_to (image_tag(contest.loser.image_path)), team_member_path(contest.loser.id) %></td>

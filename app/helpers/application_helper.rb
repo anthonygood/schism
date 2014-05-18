@@ -30,7 +30,9 @@ module ApplicationHelper
   
   private
   def get_day(time)
-    if time.to_date == Date.today
+    # trying Time.now.localtime for edge cases 
+	# where the system's day changes before/after the user
+    if time.to_date == Time.now.localtime.to_date 
 	  "Today"
 	elsif time.to_date == Date.yesterday
 	  "Yesterday"

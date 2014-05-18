@@ -8,11 +8,11 @@
 }
 
 .rotate-left {
-	-webkit-transform: rotate(-1440deg);
-	transform: rotate(-1440deg);
+	-webkit-transform: rotate(1440deg);
+	transform: rotate(1440deg);
 }
 
 .rotate-right {
-	-webkit-transform: rotate(1440deg);
-	transform: rotate(1440deg);
+	-webkit-transform: rotate(-1440deg);
+	transform: rotate(-1440deg);
 }

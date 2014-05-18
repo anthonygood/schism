@@ -53,7 +53,7 @@
 			Best winning streak: 
 		</td>
 		<td>
-			<%= @team_member.streak(:wins) %>
+			<%= @team_member.best_streak(:wins).length %>
 		</td>
 	</tr>
 	
@@ -62,10 +62,50 @@
 			Worst losing streak:
 		</td>
 		<td>
-			<%= @team_member.streak(:losses) %>
+			<%= @team_member.best_streak(:losses).length %>
 		</td>
 	</tr>	
-
+	
+	<tr class="winner">
+		<td>
+			Most likely to: 
+		</td>
+		<td>
+			<% if @likeliest.empty? %>
+			Do nothing, yet...				
+				
+			<% else %>
+				<ul>
+					<% @likeliest.each do |trait, value| %>
+						<li class=>
+							<%= trait %> <em>(<%= value %> votes)</em>
+						</li>
+					<% end %>
+				</ul>
+				<% end %>
+		</td>
+	</tr>
+	
+		<tr class="loser">
+		<td>
+			Least likely to: 
+		</td>
+		<td>
+		<% if @unlikeliest.empty? %>
+			Do anything, yet...				
+				
+			<% else %>
+			<ul>
+				<% @unlikeliest.each do |trait, value| %>
+					<li>
+						<%= trait %><em> (<%= value %> votes)</em>
+					</li>
+				<% end %>
+			</ul>
+		<% end %>
+		</td>
+	</tr>
+	
 <% if @last_victory %>
 	
 	<tr class="winner">
@@ -94,24 +134,4 @@
 	
 <% end %>
 
-</table>
-
-<h2 class="blue"><%= @team_member.name.split(" ")[0] %>'s Contests</h2>
-
-<table id="team-member-table" class="table">
-
-	<% @contests.each do |contest| %>
-		<% if @team_member.winner?(contest) %>
-			<tr class="winner">
-		<% else %>
-			<tr class="loser">
-		<% end %>
-			<td>
-				<%= link_to contest.question.text, question_path(contest.question.id) %> <em> (<%= pretty_time contest.created_at %>)</em>
-			</td>
-			<td class="small">
-				<%= portrait_link( @team_member.opponent(contest) ) %>
-			</td>
-		</tr>
-	<% end %>
 </table>

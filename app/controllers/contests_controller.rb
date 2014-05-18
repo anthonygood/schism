@@ -26,8 +26,14 @@ class ContestsController < ApplicationController
   end
   
   def index
-	@contests = Contest.limit(15).reverse_order
+	@range = params[:range] || "1-20"
+	@x, @y = @range.split("-").map( &:to_i )
+	@records = (@y - @x) + 1
+	@first_record = Contest.first.id
+	@contests = Contest.range( @x..@y ).reverse
   end
+  
+  
   
   private
 

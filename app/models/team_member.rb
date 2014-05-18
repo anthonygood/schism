@@ -18,6 +18,19 @@ class TeamMember < ActiveRecord::Base
     self.all.sample(2)
   end
   
+  def self.biggest_streaker(people, option=:wins)
+    people.sort do |a, b|
+	  b.send(option).length - a.send(option).length
+	end.first
+  end
+  
+  # pass an array and attribute you want to sort it by
+  def self.with_most(people, attribute)
+    people.sort do |a,b|
+	  b.send(attribute).length - a.send(attribute).length
+	end[0]
+  end
+  
   def is?(other_team_member)
     self.id == other_team_member.id
   end
@@ -25,6 +38,10 @@ class TeamMember < ActiveRecord::Base
   def increment_contests
     self.times_in_contests += 1
 	self.save
+  end
+  
+  def signed_up?
+    self.password_hash != nil
   end
   
   def to_s
@@ -40,6 +57,10 @@ class TeamMember < ActiveRecord::Base
     self.id == contest.winner.id
   end
   
+  def loser?(contest)
+    self.id == contest.loser.id
+  end
+  
   def in_contest?(contest)
     self.id == contest.winner.id || self.id == contest.loser.id
   end
@@ -53,25 +74,81 @@ class TeamMember < ActiveRecord::Base
 	opponent
   end
   
-  def streak(option=:wins)
-    str = ""
-	regex = option == :losses ? (/w+?/) : (/l+?/)
+  def best_streak( option=:wins )
+    self.streaks( option ).sort {|a, b| b.length - a.length }[0]
+  end
+  
+  def streaks( option=:wins )
+  
+    # set the method to call according to the option passed in
+    condition = option == :losses ? :loser? : :winner?
 	
-	# build a simple string to represent wins and losses
-	# eg. 'wwlwllwlll'
-    self.contests.each do |contest|
-	  x = self.winner?(contest) ? "w" : "l"
-	  str << x
+    streaks = self.contests.inject([[]]) do |streak, contest|
+      if self.send(condition, contest)
+	    streak[-1] << contest
+		streak
+	  else
+	    streak << []
+	  end
+    end
+	streaks.reject {|arr| arr.empty? }
+  end
+  
+  def most_likely_to
+    stats = self.likelihoods
+    max = stats[0][1]
+	stats.reject {|key, value| value < max  || value < 2}
+  end
+  
+  def least_likely_to
+    stats = self.likelihoods
+	min = stats[-1][1]
+	stats.reject {|key, value| value > min || value > -2 }
+  end
+  
+  def likelihoods
+    likely = self.tally(:wins)
+	unlikely = self.tally(:losses)
+	
+	unlikely.each do |key, value|
+	  likely[key] = (likely[key] || 0) - value
 	end
 	
-	# split the string according to option passed in,
-	# and count longest match
-	wins = str.split(regex)
-	wins.sort.reverse[0].length
+	likely.sort_by {|key, value| value }.reverse
   end
+  
+  # returns a simple hash
+  # { "question" => integer }
+  def tally(option=:wins)
+    self.send(option).inject({}) do |hash, contest|
+	  hash[contest.question.text] = (hash[contest.question.text] || 0) + 1
+	  hash
+	end
+  end
+  
+  # this one returns an array of hashes
+  # [ {"question" => "question_text", "id" => integer, "tally" => integer }, {...}, {...} ]
+  def tally_with_id(option=:wins)
+    self.send(option).inject([]) do |array, contest|
+	  obj = {}
+	  obj['id'] = contest.question.id
+	  obj['question'] = contest.question.text
+	  
+	  if hash[contest.question.text]
+	    obj['tally'] = hash[contest.question.text]['tally'] + 1
+	  else
+	    obj['tally'] = 1
+	  end
+	  
+	  hash[contest.question.text] = obj
+	  hash
+	end
+  end
+  
   
   def firstname
     self.name.split(" ")[0]
   end
+  
   
 end

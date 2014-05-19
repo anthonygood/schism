@@ -13,7 +13,6 @@ class ContestsController < ApplicationController
   end
   
   def submit
-    logger.debug "*****"
     logger.debug "User clicked button for #{TeamMember.find(params[:winner]).name}"
 	
 	Contest.create(
@@ -29,8 +28,11 @@ class ContestsController < ApplicationController
 	@range = params[:range] || "1-20"
 	@x, @y = @range.split("-").map( &:to_i )
 	@records = (@y - @x) + 1
-	@first_record = Contest.first.id
-	@contests = Contest.range( @x..@y ).reverse
+	if(Contest.first)
+	  @first_record = Contest.first.id 
+	  @contests = Contest.range( @x..@y ).reverse
+	end
+	
   end
   
   

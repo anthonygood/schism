@@ -1,8 +1,10 @@
 <h1><%= @question.text %></h1>
 
 <% if @question.count < 1 %>
-<p>There are no contests for this question, yet!</p>
+
+<h2>There aren't any contests for this question yet, so <%= link_to "get voting!", new_contest_path %></h2>
 <% else %>
+
 <table class="table">
 	<tr>
 		<th class="winner">Winners</th>

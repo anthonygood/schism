@@ -57,5 +57,6 @@ module Schism
     config.assets.version = '1.0'
 	
 	config.assets.paths << Rails.root.join("assets", "fonts")
+	config.exceptions_app = self.routes
   end
 end

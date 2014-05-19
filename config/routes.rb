@@ -12,6 +12,11 @@ Schism::Application.routes.draw do
   resources  :contests, :questions
   
   get "/team/:id/contests", :to => "team_members#contests", :as => "user_contests"
+  
+  match '/404' => 'errors#not_found'
+  match '/422' => 'errors#server_error'
+  match '/500' => 'errors#server_error'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

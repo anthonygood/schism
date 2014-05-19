@@ -25,8 +25,14 @@ class TeamMembersController < ApplicationController
 	@last_defeat = @team_member.losses.last
 	@contests = @team_member.contests
 	@heading = appellation
-	@likeliest = format_likelihoods( @team_member.most_likely_to )
-	@unlikeliest = format_likelihoods( @team_member.least_likely_to )
+	
+	if @team_member.most_likely_to 
+	  @likeliest = format_likelihoods( @team_member.most_likely_to )
+	end
+	
+	if @team_member.least_likely_to
+	  @unlikeliest = format_likelihoods( @team_member.least_likely_to )
+	end
   end
   
   def sign_in	

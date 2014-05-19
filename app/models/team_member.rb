@@ -96,12 +96,16 @@ class TeamMember < ActiveRecord::Base
   
   def most_likely_to
     stats = self.likelihoods
+	return nil if stats.empty?
+	
     max = stats[0][1]
 	stats.reject {|key, value| value < max  || value < 2}
   end
   
   def least_likely_to
     stats = self.likelihoods
+	return nil if stats.empty?
+	
 	min = stats[-1][1]
 	stats.reject {|key, value| value > min || value > -2 }
   end

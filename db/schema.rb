@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140430122212) do
+ActiveRecord::Schema.define(:version => 20140519111509) do
 
   create_table "contests", :force => true do |t|
     t.integer  "question_id"
@@ -33,9 +33,9 @@ ActiveRecord::Schema.define(:version => 20140430122212) do
     t.string   "email"
     t.string   "password_hash"
     t.string   "image_path"
-    t.integer  "times_in_contests"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.integer  "times_in_contests", :default => 0
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
 end

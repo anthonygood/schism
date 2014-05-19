@@ -79,7 +79,7 @@
 			Most likely to: 
 		</td>
 		<td>
-			<% if @likeliest.empty? %>
+			<% unless @likeliest %>
 			N/A				
 				
 			<% else %>
@@ -99,7 +99,7 @@
 			Least likely to: 
 		</td>
 		<td>
-		<% if @unlikeliest.empty? %>
+		<% unless @unlikeliest %>
 			N/A			
 				
 			<% else %>

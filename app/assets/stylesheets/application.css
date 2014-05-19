@@ -33,6 +33,7 @@
 
 /* HEADINGS */
 .blue, h1 span { color: rgba(20,180,230, 1);}
+.blue a { color: rgba(20,180,230, 1);}
 /* #my_container{ height: 45px; box-shadow: 0 3px 6px -6px rgb(100, 100, 100); }
 #my_container li a {height: 30px; margin-top: 0; line-height: 30px;} */
 @font-face {

@@ -53,7 +53,11 @@
 			Best winning streak: 
 		</td>
 		<td>
-			<%= @team_member.best_streak(:wins).length %>
+			<% if @team_member.best_streak(:wins) %>
+				<%= @team_member.best_streak(:wins).length %>
+			<% else %>
+				N/A
+			<% end %>
 		</td>
 	</tr>
 	
@@ -62,7 +66,11 @@
 			Worst losing streak:
 		</td>
 		<td>
-			<%= @team_member.best_streak(:losses).length %>
+			<% if @team_member.best_streak(:losses) %>
+				<%= @team_member.best_streak(:losses).length %>
+			<% else %>
+				N/A
+			<% end %>
 		</td>
 	</tr>	
 	
@@ -72,7 +80,7 @@
 		</td>
 		<td>
 			<% if @likeliest.empty? %>
-			Do nothing, yet...				
+			N/A				
 				
 			<% else %>
 				<ul>
@@ -92,7 +100,7 @@
 		</td>
 		<td>
 		<% if @unlikeliest.empty? %>
-			Do anything, yet...				
+			N/A			
 				
 			<% else %>
 			<ul>

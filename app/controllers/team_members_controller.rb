@@ -16,6 +16,7 @@ class TeamMembersController < ApplicationController
   
   def show
     @team_member = TeamMember.find(params[:id])
+	
   	unless logged_in?
       flash[:notice] = "You need to sign in to view #{@team_member.firstname}'s profile."
 	  return redirect_to "/sign-in"
@@ -36,6 +37,8 @@ class TeamMembersController < ApplicationController
   end
   
   def sign_in	
+    # just renders the page
+	render 'sign_in'
 
   end
   

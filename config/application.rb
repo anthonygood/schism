@@ -58,5 +58,17 @@ module Schism
 	
 	config.assets.paths << Rails.root.join("assets", "fonts")
 	config.exceptions_app = self.routes
+	
+	# For testing
+	config.generators do |g| 
+	  g.test_framework :rspec, :fixtures => true, 
+	    :view_specs => false, 
+		:helper_specs => false, 
+		:routing_specs => false, 
+		:controller_specs => true, 
+		:request_specs => true 
+	  g.fixture_replacement 
+	end
+	
   end
 end

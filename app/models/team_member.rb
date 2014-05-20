@@ -18,13 +18,15 @@ class TeamMember < ActiveRecord::Base
     self.all.sample(2)
   end
   
-  def self.biggest_streaker(people, option=:wins)
-    people.sort do |a, b|
-	  b.send(option).length - a.send(option).length
+  def self.biggest_streaker(group, option=:wins)
+    group.sort do |a, b|
+	  b.best_streak(option).length - a.best_streak(option).length
 	end.first
   end
   
-  # pass an array and attribute you want to sort it by
+  # returns the person with the most of a given attribute
+  # pass an array of people and the attribute 
+  # eg. TeamMember.with_most( group, :wins )
   def self.with_most(people, attribute)
     people.sort do |a,b|
 	  b.send(attribute).length - a.send(attribute).length
@@ -74,10 +76,17 @@ class TeamMember < ActiveRecord::Base
 	opponent
   end
   
+  # returns the longest streak for that team_member
+  # pass in :losses for losing streak
   def best_streak( option=:wins )
-    self.streaks( option ).sort {|a, b| b.length - a.length }[0]
+    streaks = self.streaks( option ).sort {|a, b| b.length - a.length }
+	# if empty, return an empty array, rather than nil
+	return [] if streaks.empty?
+	streaks[0]
   end
   
+  # returns an array of the team_member's streaks
+  # each streak is itself an array of contests
   def streaks( option=:wins )
   
     # set the method to call according to the option passed in
@@ -91,25 +100,33 @@ class TeamMember < ActiveRecord::Base
 	    streak << []
 	  end
     end
+	
 	streaks.reject {|arr| arr.empty? }
   end
   
+  # uses the team_member.likelihoods method and trims its output 
+  # to just outcomes greater than 1 vote
   def most_likely_to
     stats = self.likelihoods
 	return nil if stats.empty?
-	
-    max = stats[0][1]
-	stats.reject {|key, value| value < max  || value < 2}
+    
+	# removed the max condition, too restrictive
+    # max = stats[0][1]
+
+	stats.reject {|key, value| value < 2}
   end
   
+  # as above, but the inverse
   def least_likely_to
     stats = self.likelihoods
 	return nil if stats.empty?
 	
-	min = stats[-1][1]
-	stats.reject {|key, value| value > min || value > -2 }
+	# min = stats[-1][1]
+	stats.reject {|key, value| value > -2 }
   end
   
+  # this method tallies likely and unlikely outcomes, 
+  # and combines them in a single hash
   def likelihoods
     likely = self.tally(:wins)
 	unlikely = self.tally(:losses)
@@ -121,8 +138,9 @@ class TeamMember < ActiveRecord::Base
 	likely.sort_by {|key, value| value }.reverse
   end
   
-  # returns a simple hash
-  # { "question" => integer }
+  # returns a simple hash that tallies the votes the team_member received for each question
+  # eg. { "Who would live longest?" => 2 }
+  # pass in :losses to tally negative votes
   def tally(option=:wins)
     self.send(option).inject({}) do |hash, contest|
 	  hash[contest.question.text] = (hash[contest.question.text] || 0) + 1

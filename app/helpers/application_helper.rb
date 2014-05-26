@@ -20,8 +20,16 @@ module ApplicationHelper
   def pretty_time(time)
     time = time.localtime
     day = get_day(time)
-    time = time.strftime("%l:%M%P")
-	"#{day}, at #{time}"
+	str = ""
+	
+	if day == "Today"
+      str = time_ago_in_words(time) << " ago" 
+	else
+	  time = time.strftime("%l:%M%P")
+	  str = "#{day}, at #{time}"
+	end
+	
+	str
   end
   
   def get_name(id)

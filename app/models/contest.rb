@@ -5,6 +5,9 @@ class Contest < ActiveRecord::Base
   belongs_to :loser, {:class_name => 'TeamMember', :foreign_key => 'loser_id'}
   belongs_to :question, {:class_name => 'Question', :foreign_key => 'question_id'}
   
+  # ensure the associated records exist
+  validates :question, :winner, :loser, :presence => true 
+  
   # want to increment a Question's count attribute every time it's used
   after_create :update_question, :update_team_members
   
@@ -39,9 +42,5 @@ class Contest < ActiveRecord::Base
     self.where( :id => (db_lower_limit..db_upper_limit) )
   end	
 	
-  
-  def out_of_bounds?(ran)
-    # min, max = ran.minmax
-  end
   
 end

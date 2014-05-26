@@ -30,7 +30,7 @@ class ContestsController < ApplicationController
 	@records = (@y - @x) + 1
 	if(Contest.first)
 	  @first_record = Contest.first.id 
-	  @contests = Contest.range( @x..@y ).reverse
+	  @contests = Contest.includes(:question, :winner, :loser).range( @x..@y ).reverse
 	end
 	
   end

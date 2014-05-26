@@ -42,5 +42,5 @@ questions = [
 ]
 
 questions.each do |q|
-  Question.new( :text => q, :count => 0 ).save
+  Question.new( :text => q ).save
 end

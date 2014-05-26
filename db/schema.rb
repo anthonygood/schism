@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140519111509) do
+ActiveRecord::Schema.define(:version => 20140521131231) do
 
   create_table "contests", :force => true do |t|
     t.integer  "question_id"
@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(:version => 20140519111509) do
 
   create_table "questions", :force => true do |t|
     t.string   "text"
-    t.integer  "count"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "count",      :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "team_members", :force => true do |t|

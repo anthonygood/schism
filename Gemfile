@@ -21,7 +21,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'rspec'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', :require => 'bcrypt'
@@ -40,6 +39,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 
 group :development do
   gem 'sqlite3'
+  gem 'rspec-rails'
 end
 
 group :production do

@@ -6,16 +6,19 @@ class TeamMembersController < ApplicationController
       flash[:notice] = "You need to sign in to see the Quipper team."
 	  return redirect_to "/sign-in"
 	end
-    @team = TeamMember.all
+    
+	@team = TeamMember.includes(:wins, :losses)
 	@biggest_winner = TeamMember.with_most(@team, :wins)
 	@biggest_loser = TeamMember.with_most(@team, :losses)
-	@best_streaker = TeamMember.biggest_streaker(@team, :wins)
-	@worst_streaker = TeamMember.biggest_streaker(@team, :losses)
+	
+	#@best_streaker = TeamMember.biggest_streaker(@team, :wins)
+	#@worst_streaker = TeamMember.biggest_streaker(@team, :losses)
 
   end
   
   def show
-    @team_member = TeamMember.find(params[:id])
+    #@team_member = TeamMember.find(params[:id], :include => [:wins, :losses])
+	@team_member = TeamMember.includes(:wins, :losses).find( params[:id] )
 	
   	unless logged_in?
       flash[:notice] = "You need to sign in to view #{@team_member.firstname}'s profile."
@@ -78,8 +81,10 @@ class TeamMembersController < ApplicationController
 		# register their account
 		hashed_password = Password.create( submitted_password )
 		@user.update_attribute( :password_hash, hashed_password )
+		
 		flash[:notice] = "Account created for #{@user.name}!"
 		session[:team_member_id] = @user.id
+		
 		redirect_to '/contests/new'
       end		
 	else 

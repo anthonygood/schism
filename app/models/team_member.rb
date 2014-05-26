@@ -21,7 +21,7 @@ class TeamMember < ActiveRecord::Base
   def self.biggest_streaker(group, option=:wins)
     group.sort do |a, b|
 	  b.best_streak(option).length - a.best_streak(option).length
-	end.first
+	end[0]
   end
   
   # returns the person with the most of a given attribute
@@ -51,8 +51,7 @@ class TeamMember < ActiveRecord::Base
   end
   
   def contests
-	their_contests = self.wins + self.losses
-	their_contests.sort {|a, b| a.created_at - b.created_at }
+	(self.wins + self.losses).sort {|a, b| a.created_at - b.created_at }
   end
   
   def winner?(contest)
@@ -79,10 +78,10 @@ class TeamMember < ActiveRecord::Base
   # returns the longest streak for that team_member
   # pass in :losses for losing streak
   def best_streak( option=:wins )
-    streaks = self.streaks( option ).sort {|a, b| b.length - a.length }
+    s = self.streaks( option ).sort {|a, b| b.length - a.length }
 	# if empty, return an empty array, rather than nil
-	return [] if streaks.empty?
-	streaks[0]
+	return [] if s.empty?
+	s[0]
   end
   
   # returns an array of the team_member's streaks
@@ -92,7 +91,7 @@ class TeamMember < ActiveRecord::Base
     # set the method to call according to the option passed in
     condition = option == :losses ? :loser? : :winner?
 	
-    streaks = self.contests.inject([[]]) do |streak, contest|
+    s = self.contests.inject([[]]) do |streak, contest|
       if self.send(condition, contest)
 	    streak[-1] << contest
 		streak
@@ -101,14 +100,14 @@ class TeamMember < ActiveRecord::Base
 	  end
     end
 	
-	streaks.reject {|arr| arr.empty? }
+	s.reject {|arr| arr.empty? }
   end
   
   # uses the team_member.likelihoods method and trims its output 
   # to just outcomes greater than 1 vote
   def most_likely_to
     stats = self.likelihoods
-	return nil if stats.empty?
+	return [] if stats.empty?
     
 	# removed the max condition, too restrictive
     # max = stats[0][1]
@@ -119,7 +118,7 @@ class TeamMember < ActiveRecord::Base
   # as above, but the inverse
   def least_likely_to
     stats = self.likelihoods
-	return nil if stats.empty?
+	return [] if stats.empty?
 	
 	# min = stats[-1][1]
 	stats.reject {|key, value| value > -2 }

@@ -1,9 +1,12 @@
 class Question < ActiveRecord::Base
   attr_accessible :count, :text
   
-  has_many :contests, { :class_name => 'Contest', :foreign_key => 'question_id' }
+  # if a question is deleted, delete all its contests
+  has_many :contests, { :class_name => 'Contest', :foreign_key => 'question_id', :dependent => :destroy }
   has_many :winners, :through => :contests 
   has_many :losers, :through => :contests
+  
+  validates_presence_of :text
   
   def increment
     self.count += 1
@@ -11,9 +14,7 @@ class Question < ActiveRecord::Base
   end
   
   def self.random
-    max = self.count
-	random = rand(max) + 1
-    self.find random
+    self.first(:offset => rand(self.count))
   end
   
 end

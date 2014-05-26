@@ -1,0 +1,18 @@
+<table class="table">
+	<tr class="winner">
+		<td>Biggest Winner:</td>
+		<td class="small"> <%= portrait_link @biggest_winner %> <%= "#{@biggest_winner.firstname}, with #{@biggest_winner.wins.length} wins"%></td>
+	</tr>
+	<tr class="loser">
+		<td>Biggest Loser:</td>
+		<td class="small"> <%= portrait_link @biggest_loser %> <%= "#{@biggest_loser.firstname}, with #{@biggest_loser.losses.length} losses"%></td>
+	</tr>
+	<tr class="winner">
+		<td>Best winning streak:</td>
+		<td class="small"><%= portrait_link @best_streaker %> <%= "#{@best_streaker.firstname}, with #{@best_streaker.best_streak(:wins).length} wins in a row"%></td>
+	</tr>
+	<tr class="loser">
+		<td>Worst losing streak:</td>
+		<td class="small"><%= portrait_link @worst_streaker %> <%= "#{@worst_streaker.firstname}, with #{@worst_streaker.best_streak(:losses).length} losses in a row"%></td>
+	</tr>	
+</table>

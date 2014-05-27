@@ -41,6 +41,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 group :development do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :production do

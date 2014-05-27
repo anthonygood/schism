@@ -42,8 +42,7 @@ class TeamMembersController < ApplicationController
 	@win_streak = @team_member.streaks_light(:wins)
 	@loss_streak = @team_member.streaks_light(:losses)
 	
-	@likeliest = []
-	@unlikeliest = []
+
 	
 	if @team_member.most_likely_to 
 	  @likeliest = format_likelihoods( @team_member.most_likely_to )

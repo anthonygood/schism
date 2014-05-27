@@ -16,3 +16,14 @@
 	-webkit-transform: rotate(-1440deg);
 	transform: rotate(-1440deg);
 }
+
+#contest_table  td, #contest_table th {text-align: center; border-top: none;}
+.medallion { 
+	width: 150px; 
+	height: 150px;
+	border-radius: 100px; 
+	border: 0 solid white; 
+	box-shadow: 1px 1px 10px rgb(100, 100, 100); 
+	opacity: 1; 
+}
+

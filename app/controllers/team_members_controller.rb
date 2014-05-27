@@ -13,22 +13,37 @@ class TeamMembersController < ApplicationController
 	
 	#@best_streaker = TeamMember.biggest_streaker(@team, :wins)
 	#@worst_streaker = TeamMember.biggest_streaker(@team, :losses)
+	
+	@best_streaker = get_best_streaker
+	@worst_streaker = get_worst_streaker
+	
+
 
   end
   
   def show
     #@team_member = TeamMember.find(params[:id], :include => [:wins, :losses])
-	@team_member = TeamMember.includes(:wins, :losses).find( params[:id] )
 	
   	unless logged_in?
-      flash[:notice] = "You need to sign in to view #{@team_member.firstname}'s profile."
+      flash[:notice] = "You need to sign in to view someone's profile."
 	  return redirect_to "/sign-in"
 	end
 	
-	@last_victory = @team_member.wins.last
-	@last_defeat = @team_member.losses.last
-	@contests = @team_member.contests
+	@team_member = TeamMember.find( params[:id])
 	@heading = appellation
+	
+	@wins = @team_member.wins.includes(:question).all
+	@losses = @team_member.losses.includes(:question).all
+	
+	@last_victory = @wins.last
+	@last_defeat = @losses.last
+	
+	
+	@win_streak = @team_member.streaks_light(:wins)
+	@loss_streak = @team_member.streaks_light(:losses)
+	
+	@likeliest = []
+	@unlikeliest = []
 	
 	if @team_member.most_likely_to 
 	  @likeliest = format_likelihoods( @team_member.most_likely_to )
@@ -98,10 +113,19 @@ class TeamMembersController < ApplicationController
     session[:team_member_id] = nil
 	redirect_to '/sign-in'
   end
+
+  def get_best_streaker
+    @team.sort {|a,b| b.streaks_light(:wins) - a.streaks_light(:wins) }.first
+  end
   
+  def get_worst_streaker
+    @team.sort {|a,b| b.streaks_light(:losses) - a.streaks_light(:losses) }.first
+  end
+    
   
   private
   
+
   def appellation
     ["Quipper Colleague","Quiz Stalwart","Education Apostle","Distributor of Wisdom","Courier of Knowledge","Knowledge Expert","Thinker of Big Ideas","Quipper Footsoldier", "Learner", "Professor of Truth and Light", "Quasher of Ignorance"].sample(1)[0]
   end

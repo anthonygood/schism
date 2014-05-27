@@ -35,7 +35,7 @@
 			Victories: 
 		</td>
 		<td>
-			<%= @team_member.wins.count %>
+			<%= @wins.count %>
 		</td>
 	</tr>
 	
@@ -44,7 +44,7 @@
 			Defeats: 
 		</td>
 		<td>
-			<%= @team_member.losses.count %>
+			<%= @losses.count %>
 		</td>
 	</tr>
 	
@@ -53,8 +53,8 @@
 			Best winning streak: 
 		</td>
 		<td>
-			<% if @team_member.best_streak(:wins).length > 1 %>
-				<%= @team_member.best_streak(:wins).length %>
+			<% if @win_streak > 1 %>
+				<%= @win_streak %>
 			<% else %>
 				None
 			<% end %>
@@ -66,8 +66,8 @@
 			Worst losing streak:
 		</td>
 		<td>
-			<% if @team_member.best_streak(:losses).length > 1 %>
-				<%= @team_member.best_streak(:losses).length %>
+			<% if @loss_streak > 1 %>
+				<%= @loss_streak %>
 			<% else %>
 				None
 			<% end %>

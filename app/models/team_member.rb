@@ -103,6 +103,15 @@ class TeamMember < ActiveRecord::Base
 	s.reject {|arr| arr.empty? }
   end
   
+  def streaks_light( option=:wins )
+    str = ""
+	regex = option == :losses ? /w+/ : /l+/
+    s = self.contests.each { |contest| str << (self.id == contest.winner_id ? 'w' : 'l') }
+	streaks = str.split(regex).compact
+    return 0 if streaks.empty?
+	streaks.sort.last.length
+  end
+  
   # uses the team_member.likelihoods method and trims its output 
   # to just outcomes greater than 1 vote
   def most_likely_to

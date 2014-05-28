@@ -13,22 +13,22 @@
 	<tr>
 	
 		<td><%= button_to @contestant_a.name, {
-		  :controller => "contests", 
+		  :controller => "contests",	  
 		  :action => "submit", 
 		  :method => "post", 
 		  :winner => @contestant_a.id,
 		  :loser => @contestant_b.id,
 		  :question => @question.id
-		}, :class => "btn" %></td>
+		}, :class => "btn contest", :data => 'left' %></td>
 		
 		<td><%= button_to @contestant_b.name, {
-		  :controller => "contests", 
+		  :controller => "contests",		  
 		  :action => "submit", 
 		  :method => "post", 
 		  :winner => @contestant_b.id,
 		  :loser => @contestant_a.id,
 		  :question => @question.id
-		}, :class => "btn" %></td>
+		}, :class => "btn contest", :data => "right" %></td>
 	</tr>
 
 </table>

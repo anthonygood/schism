@@ -12,7 +12,7 @@
  *= require_tree .
 */
 body#body {
-	background-color: rgb(20,190,240);
+	background-color: rgb(20,185,240);
 }
 
 /* NAVBAR */
@@ -26,8 +26,8 @@ body#body {
 	text-shadow: 1px 1px 1px rgb(20, 150, 200);
 }
 
-#my_nav  .nav li.active a {
-	background-color: rgb(20,190,240);
+#my_nav .nav li.active a {
+	background-color: rgb(20,185,240);
 	box-shadow: none;
 }
 	
@@ -36,8 +36,8 @@ body#body {
 .nav.navbar-right li a.portrait { padding: 0; }
 
 /* HEADINGS */
-.blue, h1 span { color: rgba(255,255,255, 1);}
-.blue a { color: rgba(255,255,255, 1);}
+.blue, h1 span { color: rgba(255,255,255, 1); }
+.blue a { color: rgba(255,255,255, 1); }
 /* #my_container{ height: 45px; box-shadow: 0 3px 6px -6px rgb(100, 100, 100); }
 #my_container li a {height: 30px; margin-top: 0; line-height: 30px;} */
 
@@ -45,21 +45,21 @@ body#body {
   font-family: 'Chunkfive';    
   src: url('Chunkfive.otf');
   font-weight: normal;
-  font-style: normal;}
+  font-style: normal;
+}
   
 /* TABLES */
+table.table { background-color: rgba(255,255,255,0.15); }
 table th.winner { background-color: rgba(20, 180, 240, 1); }
 table .winner {  background-color: rgba(20, 180, 240, 0.9); }
-table th.loser {background-color: rgba(255, 120, 170, 0.8); }
-table .loser { background-color: rgba(255, 120, 170, 0.6); }
-table .loser a { color: rgb(230, 40, 100); }
+table th.loser {background-color: rgba(255, 120, 170, 0.9); }
+table .loser { background-color: rgba(255, 120, 170, 0.8); }
+table .loser a {  color: rgba(255,255,255,0.9); }
 table th.neutral { background-color: rgba(255, 255, 255, 0.5); }
 table .neutral { background-color: rgba(255, 255, 255, 0.2); }
 table .neutral img { opacity: 1; }
-table td.text-center { text-align: center;}
-
-
-table a { color: white }
+table td.text-center { text-align: center; }
+table a { color: rgba(0,0,0,0.7); }
 
 .small img { width: 60px; border-radius: 30px; min-width: 60px; height: 60px; }
 
@@ -78,5 +78,5 @@ table img:hover { opacity: 1; }
 /*border-bottom: 4px solid rgb(200, 200, 200); */
 
 #sign-in-alerts { min-height: 70px; }
-.alert.my-alert { background-color: rgba(255, 255, 255, 0.5); color: white; font-weight: bold; text-shadow: 1px 1px 1px rgb(10, 150, 220);}
-.alert.alert-danger.my-alert { background-color: rgba(255, 120, 170, 0.8); box-shadow: none; text-shadow: none; border: none;}
+.alert.my-alert { background-color: rgba(255, 255, 255, 0.6); color: rgb(10,100,150); font-weight: bold;}
+.alert.alert-danger.my-alert { background-color: rgba(255, 120, 170, 1); box-shadow: none; text-shadow: none; border: none; color: white;}

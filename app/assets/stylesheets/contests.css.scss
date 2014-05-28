@@ -17,13 +17,42 @@
 	transform: rotate(-1440deg);
 }
 
-#contest_table  td, #contest_table th {text-align: center; border-top: none;}
+#contest_table.table {
+	background-color: transparent;
+}
+
+#contest_table  td, #contest_table th {
+	text-align: center; 
+	border-top: none;
+
+}
+
 .medallion { 
-	width: 150px; 
-	height: 150px;
+	width: 175px; 
+	height: 175px;
 	border-radius: 100px; 
-	border: 0 solid white; 
-	box-shadow: 1px 1px 10px rgb(100, 100, 100); 
+	border: 0 solid transparent; 
+	/*box-shadow: 1px 1px 10px rgb(100, 100, 100); */
 	opacity: 1; 
 }
+
+.medallion.chosen {
+	transition: all 0.5s;
+	box-shadow: 0 0 55px white;
+
+
+}
+
+.btn.chosen, .btn.chosen[disabled] {
+	transition: all 0.5s;
+	box-shadow: 0 0 50px rgba(255,255,255, 0.7);
+	background-color: rgba(255,255,255,1);
+	opacity: 1;
+}
+
+.btn[disabled] {
+	background-color: rgb(230,230,230);
+	opacity: 1;
+}
+
 

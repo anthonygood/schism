@@ -17,7 +17,7 @@ $(document).ready( function(){
 				quiver($el, direction); } );
 	}
 	
-	function bounceBorder($el){
+	function zoom($el){
 		
 		$el
 		.css({'border-width': '75px'})
@@ -26,35 +26,14 @@ $(document).ready( function(){
 		.animate({'border-width': '10', duration: 200});
 	}	
 	
-	function rejected($el, button){
 	
-		$el
-		.toggleClass('rotate-right')
-		.animate({'border-width': '85'}, 1000, function(){
-			$el.animate({'opacity': 0}, 250);
-			button.disabled = false;
-			$(button).parent().parent().submit();
-			button.disabled = true;
-		});
-	}
+
 	
-	function selected($medallion){
-		$medallion
-		
-			.animate({'border-width': '20', 'easing': 'ease-in'}, 120)
-			.animate({'border-width': '5', 'easing': 'ease-in'}, 80)
-			.animate({'border-width': '10', 'easing': 'ease-in'}, 80)
-			.animate({'border-width': '0', 'easing': 'ease-in'}, 100)
-			.animate({'border-width': '5', 'easing': 'ease-in'}, 110)
-			.animate({'border-width': '0', 'easing': 'ease-in'}, 150, function(){
-				$(this).addClass('chosen');
-			});
-		
-	}
 
 	var $medallions = $(".medallion"),
-		$left = $medallions.filter(".left"), 
-		$right = $medallions.filter(".right");
+		$left 		= $medallions.filter(".left"), 
+		$right 		= $medallions.filter(".right"),
+		$q			= $('#question');
 	
 	// make the medallions quiver
 	//quiver($left, "left");
@@ -68,9 +47,19 @@ $(document).ready( function(){
 	$left.addClass('rotate-right');
 	$right.addClass('rotate-left');
 	
-	//bounce the medallions' borders
+	//spin and zoom the medallions
 	$medallions.css({'border-width': '50px'});
-	bounceBorder($medallions);
+	
+	zoom($medallions);
+	
+	//hide the #question
+	$q.css('top', '-1000px');
+	
+	function pullDownQuestion(){
+		$q.css('top', '0px');
+	};
+	
+	window.setTimeout(pullDownQuestion, 2000);
 	
 	
 	$left.on("click", function(){
@@ -84,27 +73,79 @@ $(document).ready( function(){
 	
 	//animations for voting!
 	$('.btn.contest').on('click', function(e){
+		//prevent form submission
 		e.preventDefault();
-		console.log("ping");
-		
+		//disable form submission on subsequent clicks
 		$('.btn').attr('disabled','disabled');
+		//stop further click events
 		$('.btn').off('click');
-		//left or right? get the data tag
-		var position = "." + $(this).attr('data'),
-			$thisMedallion = $('.medallion'+position),
-			$otherMedallion = $($medallions.not(position));
-			
-		console.log("$thisMedallion: ", $thisMedallion);
+		//variable housekeeping
+		var position 		= "." + $(this).attr('data'),
+			$thisMedallion 	= $('.medallion'+position),
+			$otherMedallion = $($medallions.not(position)),
+			button 			= this,
+			$otherButton	= $('.btn').not($(this)),
+			winner			= this.value.split(" ")[0];
+		
+		console.log("THE WINNER IS...", winner);
 		//hide the other button
-		$('.btn').not($(this)).fadeOut();
+		$otherButton.fadeOut();
 		//change this button's class
 		$(this).addClass('chosen');
 		
 		//animate the discarded medallion
-		//pass it 'this' to submit form on complete
-		rejected($otherMedallion, this);
+		rejected();
 		//animate the chosen medallion
-		selected($thisMedallion);
+		selected();
+		
+		function rejected(){
+	
+			$otherMedallion
+				.toggleClass('rotate-right')
+				.animate({'border-width': '85'}, 1000, function(){
+					$otherMedallion.animate({'opacity': 0}, 250);
+					
+					finishAnimations();
+				});
+		}	
+		
+		function finishAnimations(){
+			//after zooming and spinning,
+			//inject the winner's name where the losing medallion was
+			$otherMedallion
+				.parent()
+				.html(
+				"<h1 class='blue'>"
+				+ winner 
+				+ "</h1>"
+				)
+				.children()
+				.animate({'font-size': '54px'}, 120)
+				.animate({'font-size': '38px'}, 100)
+				.animate({'font-size': '48px'}, 110)
+				.animate({'font-size': '42px'}, 130);
+			
+			//enable the button just so we can submit it
+			button.disabled = false;
+			$(button).parent().parent().submit();
+			//and disable it again!
+			//(presumably there's a better way...)
+			button.disabled = true;
+		
+		}
+		
+		function selected(){
+			$thisMedallion		
+				.animate({'border-width': '20', 'easing': 'ease-in'}, 120)
+				.animate({'border-width': '5', 'easing': 'ease-in'}, 80)
+				.animate({'border-width': '10', 'easing': 'ease-in'}, 80)
+				.animate({'border-width': '0', 'easing': 'ease-in'}, 100)
+				.animate({'border-width': '5', 'easing': 'ease-in'}, 110)
+				.animate({'border-width': '0', 'easing': 'ease-in'}, 150, function(){
+					$(this).addClass('chosen');
+			});
+		
+		}
 	});
 
 });

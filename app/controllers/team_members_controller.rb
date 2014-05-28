@@ -49,7 +49,7 @@ class TeamMembersController < ApplicationController
 	end
 	
 	if @team_member.least_likely_to
-	  @unlikeliest = format_likelihoods( @team_member.least_likely_to )
+	  @unlikeliest = format_likelihoods( @team_member.least_likely_to ).reverse
 	end
   end
   
@@ -83,7 +83,7 @@ class TeamMembersController < ApplicationController
 	    # check their password is correct
 		if Password.new( @user.password_hash) == submitted_password 
 		
-          flash[:notice] = "You've logged in as #{@user.name}"
+          # flash[:notice] = "You've logged in as #{@user.name}"
 		  session[:team_member_id] = @user.id
 		  return redirect_to '/contests/new'
 		else

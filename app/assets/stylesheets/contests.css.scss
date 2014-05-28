@@ -24,6 +24,8 @@
 #contest_table  td, #contest_table th {
 	text-align: center; 
 	border-top: none;
+	vertical-align: middle;
+	width: 50%;
 
 }
 
@@ -53,6 +55,17 @@
 .btn[disabled] {
 	background-color: rgb(230,230,230);
 	opacity: 1;
+}
+
+h3#question {
+	font-family: 'Chunkfive', arial, san-serif; 
+	font-size: 42px;
+	transition: all 1s;
+	position: relative;
+
+}
+h3#question.prefix { 
+	color: white;
 }
 
 

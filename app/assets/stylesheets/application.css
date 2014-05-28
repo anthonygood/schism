@@ -12,7 +12,8 @@
  *= require_tree .
 */
 body#body {
-	background-color: rgb(20,185,240);
+	/* background-color: rgb(20,185,240); */
+	background-color: white;
 }
 
 /* NAVBAR */
@@ -36,8 +37,8 @@ body#body {
 .nav.navbar-right li a.portrait { padding: 0; }
 
 /* HEADINGS */
-.blue, h1 span { color: rgba(255,255,255, 1); }
-.blue a { color: rgba(255,255,255, 1); }
+.blue, h1 span { color: rgba(20,185,240, 1);}
+.blue a { color: rgba(20,185,240, 1); }
 /* #my_container{ height: 45px; box-shadow: 0 3px 6px -6px rgb(100, 100, 100); }
 #my_container li a {height: 30px; margin-top: 0; line-height: 30px;} */
 
@@ -50,16 +51,16 @@ body#body {
   
 /* TABLES */
 table.table { background-color: rgba(255,255,255,0.15); }
-table th.winner { background-color: rgba(20, 180, 240, 1); }
-table .winner {  background-color: rgba(20, 180, 240, 0.9); }
-table th.loser {background-color: rgba(255, 120, 170, 0.9); }
-table .loser { background-color: rgba(255, 120, 170, 0.8); }
-table .loser a {  color: rgba(255,255,255,0.9); }
+table th.winner { background-color: rgba(20, 180, 240, 0.7); }
+table .winner {  background-color: rgba(20, 180, 240, 0.4); }
+table th.loser {background-color: rgba(255, 120, 170, 0.7); }
+table .loser { background-color: rgba(255, 120, 170, 0.3); }
+table .loser a {  color: rgba(225,40,120,0.9); }
 table th.neutral { background-color: rgba(255, 255, 255, 0.5); }
-table .neutral { background-color: rgba(255, 255, 255, 0.2); }
+table .neutral { background-color: rgba(20, 180, 240, 0.1); }
 table .neutral img { opacity: 1; }
 table td.text-center { text-align: center; }
-table a { color: rgba(0,0,0,0.7); }
+table a { color: rgba(10,100,140,1); }
 
 .small img { width: 60px; border-radius: 30px; min-width: 60px; height: 60px; }
 

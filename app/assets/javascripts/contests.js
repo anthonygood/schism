@@ -95,8 +95,7 @@ $(document).ready( function(){
 		
 		//animate the discarded medallion
 		rejected();
-		//animate the chosen medallion
-		selected();
+
 		
 		function rejected(){
 	
@@ -104,7 +103,7 @@ $(document).ready( function(){
 				.toggleClass('rotate-right')
 				.animate({'border-width': '85'}, 1000, function(){
 					$otherMedallion.animate({'opacity': 0}, 250);
-					
+					selected();
 					finishAnimations();
 				});
 		}	
@@ -112,17 +111,18 @@ $(document).ready( function(){
 		function finishAnimations(){
 			//after zooming and spinning,
 			//inject the winner's name where the losing medallion was
-			$otherMedallion
+			$(button)
+				.hide()
 				.parent()
-				.html(
-				"<h1 class='blue'>"
+				.prepend(
+				"<h2 class='blue victor'>"
 				+ winner 
-				+ "</h1>"
+				+ "</h2>"
 				)
 				.children()
-				.animate({'font-size': '54px'}, 120)
-				.animate({'font-size': '38px'}, 100)
-				.animate({'font-size': '48px'}, 110)
+				.animate({'font-size': '48px'}, 120)
+				.animate({'font-size': '36px'}, 100)
+				.animate({'font-size': '45px'}, 110)
 				.animate({'font-size': '42px'}, 130);
 			
 			//enable the button just so we can submit it
@@ -137,11 +137,11 @@ $(document).ready( function(){
 		function selected(){
 			$thisMedallion		
 				.animate({'border-width': '20', 'easing': 'ease-in'}, 120)
-				.animate({'border-width': '5', 'easing': 'ease-in'}, 80)
-				.animate({'border-width': '10', 'easing': 'ease-in'}, 80)
-				.animate({'border-width': '0', 'easing': 'ease-in'}, 100)
-				.animate({'border-width': '5', 'easing': 'ease-in'}, 110)
-				.animate({'border-width': '0', 'easing': 'ease-in'}, 150, function(){
+				.animate({'border-width': '5', 'easing': 'ease-in'}, 100)
+				.animate({'border-width': '10', 'easing': 'ease-in'}, 100)
+				.animate({'border-width': '0', 'easing': 'ease-in'}, 110)
+				.animate({'border-width': '5', 'easing': 'ease-in'}, 130)
+				.animate({'border-width': '0', 'easing': 'ease-in'}, 300, function(){
 					$(this).addClass('chosen');
 			});
 		

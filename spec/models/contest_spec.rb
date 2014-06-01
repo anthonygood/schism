@@ -46,22 +46,24 @@ describe Contest do
   
   context "after saving" do
   
-    it "updates the attributes of its Question" do
+    before :each do
+	  contest.stub(:question => double(:increment => 0))
 	  contest.stub(:winner => double(:increment_contests => 0))
 	  contest.stub(:loser => double(:increment_contests => 0))
+	  end
+  
+    it "updates the attributes of its question" do
 	  
       contest.question.should_receive(:increment)
       contest.save
-	  puts contest.errors.full_messages
     end
 	
 	it "updates the attributes of its winner and loser" do
-	  contest.stub(:question => double(:increment => 0))
 
 	  contest.winner.should_receive(:increment_contests)
 	  contest.loser.should_receive(:increment_contests)
+
 	  contest.save
-	  puts contest.errors.full_messages
 	end
 	
   end

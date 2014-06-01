@@ -8,17 +8,23 @@ class TeamMembersController < ApplicationController
 	end
     
 	@team = TeamMember.includes(:wins, :losses)
-	@biggest_winner = TeamMember.with_most(@team, :wins)
-	@biggest_loser = TeamMember.with_most(@team, :losses)
+	#@biggest_winner = TeamMember.with_most(@team, :wins)
+	#@biggest_loser = TeamMember.with_most(@team, :losses)
+	
+	@biggest_winner = TeamMember.biggest_winner(@team)
+	@biggest_loser = TeamMember.biggest_loser(@team)
 	
 	#@best_streaker = TeamMember.biggest_streaker(@team, :wins)
 	#@worst_streaker = TeamMember.biggest_streaker(@team, :losses)
 	
 	@best_streaker = get_best_streaker
+	@best_streak = @best_streaker.streaks_light
 	@worst_streaker = get_worst_streaker
+	@worst_streak = @worst_streaker.streaks_light(:losses)
 	
-
-
+	
+	#render :nothing => true
+	
   end
   
   def show
@@ -54,7 +60,9 @@ class TeamMembersController < ApplicationController
   end
   
   def sign_in	
-    # just renders the page
+    # redirect if the user is already signed in
+	return redirect_to team_member_path(session[:team_member_id]) if logged_in?
+	
 	render 'sign_in'
 
   end
@@ -136,6 +144,7 @@ class TeamMembersController < ApplicationController
 	end
 	pretty
   end
+  
   
   
 end

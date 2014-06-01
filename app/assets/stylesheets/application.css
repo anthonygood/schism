@@ -79,5 +79,5 @@ table img:hover { opacity: 1; }
 /*border-bottom: 4px solid rgb(200, 200, 200); */
 
 #sign-in-alerts { min-height: 70px; }
-.alert.my-alert { background-color: rgba(255, 255, 255, 0.6); color: rgb(10,100,150); font-weight: bold;}
+.alert.my-alert { background-color: rgba(20, 180, 240, 0.6); color: rgb(255,255,255); font-weight: bold; text-shadow: none;}
 .alert.alert-danger.my-alert { background-color: rgba(255, 120, 170, 1); box-shadow: none; text-shadow: none; border: none; color: white;}

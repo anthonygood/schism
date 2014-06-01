@@ -4,6 +4,8 @@ class TeamMember < ActiveRecord::Base
   has_many :wins, {:class_name => 'Contest', :foreign_key => 'winner_id'} 
   has_many :losses, {:class_name => 'Contest', :foreign_key => 'loser_id'}
   
+  validates_presence_of :name, :email
+  
   
   #belongs_to :question, :through => :contests
   
@@ -25,12 +27,21 @@ class TeamMember < ActiveRecord::Base
   end
   
   # returns the person with the most of a given attribute
-  # pass an array of people and the attribute 
+  # pass an ActiveRecord collection of people and the attribute 
   # eg. TeamMember.with_most( group, :wins )
+  
   def self.with_most(people, attribute)
     people.sort do |a,b|
 	  b.send(attribute).length - a.send(attribute).length
 	end[0]
+  end
+	
+  def self.biggest_winner(people)
+    self.with_most(people, :wins)
+  end
+  
+  def self.biggest_loser(people)
+    self.with_most(people, :losses)
   end
   
   def is?(other_team_member)
@@ -86,6 +97,8 @@ class TeamMember < ActiveRecord::Base
   
   # returns an array of the team_member's streaks
   # each streak is itself an array of contests
+  
+  # NOTE: this version suffers from N+1 queries
   def streaks( option=:wins )
   
     # set the method to call according to the option passed in
@@ -103,6 +116,7 @@ class TeamMember < ActiveRecord::Base
 	s.reject {|arr| arr.empty? }
   end
   
+  # this version just returns a number
   def streaks_light( option=:wins )
     str = ""
 	regex = option == :losses ? /w+/ : /l+/
@@ -156,6 +170,7 @@ class TeamMember < ActiveRecord::Base
 	end
   end
   
+  # IN PROGRESS -----------------------
   # this one returns an array of hashes
   # [ {"question" => "question_text", "id" => integer, "tally" => integer }, {...}, {...} ]
   def tally_with_id(option=:wins)

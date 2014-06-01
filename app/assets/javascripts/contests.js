@@ -76,9 +76,9 @@ $(document).ready( function(){
 		//prevent form submission
 		e.preventDefault();
 		//disable form submission on subsequent clicks
-		$('.btn').attr('disabled','disabled');
+		$('.btn').attr('disabled','disabled')
 		//stop further click events
-		$('.btn').off('click');
+			.off('click');
 		//variable housekeeping
 		var position 		= "." + $(this).attr('data'),
 			$thisMedallion 	= $('.medallion'+position),
@@ -91,7 +91,7 @@ $(document).ready( function(){
 		//hide the other button
 		$otherButton.fadeOut();
 		//change this button's class
-		$(this).addClass('chosen');
+		$(button).addClass('chosen');
 		
 		//animate the discarded medallion
 		rejected();
@@ -123,15 +123,16 @@ $(document).ready( function(){
 				.animate({'font-size': '48px'}, 120)
 				.animate({'font-size': '36px'}, 100)
 				.animate({'font-size': '45px'}, 110)
-				.animate({'font-size': '42px'}, 130);
+				.animate({'font-size': '42px'}, 130, function(){
+					submitVote()
+				});
 			
-			//enable the button just so we can submit it
-			button.disabled = false;
-			$(button).parent().parent().submit();
-			//and disable it again!
-			//(presumably there's a better way...)
-			button.disabled = true;
 		
+		}
+		function submitVote(){
+
+			$(button).parent().parent().submit();
+
 		}
 		
 		function selected(){

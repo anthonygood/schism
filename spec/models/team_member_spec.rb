@@ -1,10 +1,20 @@
 require 'spec_helper'
 
 describe TeamMember do
-  subject(:team_member) { TeamMember.new( :id => 1, :name => 'Anthony Good', 	:email => 'anthony@quipper.com'	) }
+  subject(:team_member) { TeamMember.create( :name => 'Anthony Good', 	:email => 'anthony@quipper.com'	) }
+  let(:opponent) { TeamMember.create(:name => "Jerry", :email => "jez@google.com") }
+  let(:question) { Question.create(:text => "What if?") }
   
   it "has a default value of 0 for 'times_in_contests'" do
+
     team_member.times_in_contests.should be 0
+  end
+  
+  it "destroys associated records when destroyed" do
+    opponent # invoke the let
+	question # invoke the let
+    team_member.wins.create(:loser_id => 1, :question_id => 1)
+    expect{ team_member.destroy }.to change { Contest.count }.by -1
   end
   
   context "validates" do
@@ -18,6 +28,7 @@ describe TeamMember do
 	  team_member.should_not be_valid
 	end
   end
+  
   
   describe ".increment_contests" do
     it "increments 'times_in_contests'" do
@@ -100,6 +111,49 @@ describe TeamMember do
 	
 	end
 	
+  end
+  
+  describe ".streaks_light" do
+    before :each do 
+	  team_member.save # have to save to create contests
+	  opponent = TeamMember.create(:name => "Jerry", :email => "jez@google.com")
+	  question = Question.create(:text => "What if?")
+	end
+	
+    it "returns 2 for a winstreak of 2" do
+	  2.times { team_member.wins.create(:question_id => 1, :loser_id => 2) }
+	  
+	  team_member.streaks_light.should be 2
+	end
+	
+	it "returns 50 for a winstreak of 50" do
+	  50.times { team_member.wins.create(:question_id => 1, :loser_id => 2) }
+	  team_member.streaks_light.should be 50
+	end
+	
+	it "correctly counts consecutive victories only" do
+	  team_member.wins.create(:question_id => 1, :loser_id => 2)
+	  team_member.losses.create(:question_id => 1, :winner_id => 2)
+	  team_member.wins.create(:question_id => 1, :loser_id => 2)
+	  
+	  team_member.streaks_light.should be 1
+	  
+	end
+	
+	it "returns the best streak of wins by default" do
+	  2.times { team_member.wins.create(:question_id => 1, :loser_id => 2)}
+	  3.times { team_member.losses.create(:question_id => 1, :winner_id => 2) }
+	  
+	  team_member.streaks_light.should be 2
+	end
+	
+	it "returns the losing streak if called with a :losses parameter" do
+	  2.times { team_member.wins.new(:question_id => 1, :loser_id => 2).save }
+	  3.times { team_member.losses.new(:question_id => 1, :winner_id => 2).save }
+	  
+	  team_member.streaks_light(:losses).should be 3
+	end
+  
   end
   
   end

@@ -1,8 +1,8 @@
 class TeamMember < ActiveRecord::Base
   attr_accessible :email, :image_path, :name, :password_hash, :times_in_contests
   
-  has_many :wins, {:class_name => 'Contest', :foreign_key => 'winner_id'} 
-  has_many :losses, {:class_name => 'Contest', :foreign_key => 'loser_id'}
+  has_many :wins, {:class_name => 'Contest', :foreign_key => 'winner_id', :dependent => :destroy} 
+  has_many :losses, {:class_name => 'Contest', :foreign_key => 'loser_id', :dependent => :destroy}
   
   validates_presence_of :name, :email
   
@@ -120,6 +120,7 @@ class TeamMember < ActiveRecord::Base
   def streaks_light( option=:wins )
     str = ""
 	regex = option == :losses ? /w+/ : /l+/
+#/
     s = self.contests.each { |contest| str << (self.id == contest.winner_id ? 'w' : 'l') }
 	streaks = str.split(regex).compact
     return 0 if streaks.empty?
@@ -173,17 +174,19 @@ class TeamMember < ActiveRecord::Base
   # IN PROGRESS -----------------------
   # this one returns an array of hashes
   # [ {"question" => "question_text", "id" => integer, "tally" => integer }, {...}, {...} ]
+  
+  #{ question_id: 1, question: "What if?", tally: 1 }
+  
   def tally_with_id(option=:wins)
-    self.send(option).inject([]) do |array, contest|
-	  obj = {}
-	  obj['id'] = contest.question.id
-	  obj['question'] = contest.question.text
+    self.send(option).inject({}) do |hash, contest|
+	  obj = { 'question_id' => 1, 'count' => 1 }
+	   obj['question_id'] = contest.question.id
 	  
-	  if hash[contest.question.text]
-	    obj['tally'] = hash[contest.question.text]['tally'] + 1
-	  else
-	    obj['tally'] = 1
-	  end
+	   if hash[contest.question.text]
+	     obj['count'] =  1
+	   else
+	     obj['count'] = 1
+	   end
 	  
 	  hash[contest.question.text] = obj
 	  hash

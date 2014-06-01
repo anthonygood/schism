@@ -28,7 +28,6 @@ class TeamMembersController < ApplicationController
   end
   
   def show
-    #@team_member = TeamMember.find(params[:id], :include => [:wins, :losses])
 	
   	unless logged_in?
       flash[:notice] = "You need to sign in to view someone's profile."

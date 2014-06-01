@@ -17,13 +17,13 @@ $(document).ready( function(){
 				quiver($el, direction); } );
 	}
 	
-	function zoom($el){
+	function zoom($el, callback){
 		
 		$el
 		.css({'border-width': '75px'})
 		.animate({'border-width': '0'}, 1000)
 		.animate({'border-width': '25', duration: 100})
-		.animate({'border-width': '10', duration: 200});
+		.animate({'border-width': '10', duration: 200}, function(){ callback(); } );
 	}	
 	
 	
@@ -47,10 +47,17 @@ $(document).ready( function(){
 	$left.addClass('rotate-right');
 	$right.addClass('rotate-left');
 	
-	//spin and zoom the medallions
+	//set fat transparent borders to shrink medallions 
 	$medallions.css({'border-width': '50px'});
 	
-	zoom($medallions);
+	//hide the buttons at first
+	$('.btn').css("opacity", "0");
+	
+	//now spin and zoom the medallions
+	//and reveal the buttons after
+	zoom($medallions, function(){
+		$('.btn').css("opacity", "1");
+	});
 	
 	//hide the #question
 	$q.css('top', '-1000px');
@@ -87,11 +94,10 @@ $(document).ready( function(){
 			$otherButton	= $('.btn').not($(this)),
 			winner			= this.value.split(" ")[0];
 		
-		console.log("THE WINNER IS...", winner);
 		//hide the other button
 		$otherButton.fadeOut();
 		//change this button's class
-		$(button).addClass('chosen');
+		//$(button).addClass('chosen');
 		
 		//animate the discarded medallion
 		rejected();

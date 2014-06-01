@@ -5,21 +5,21 @@ describe Contest do
   subject(:contest){ Contest.new( )}
   
   context "validates" do
-  
-	  it "its associated question" do 
+
+	it "its associated question" do 
 		contest = Contest.new(:winner_id => 1, :loser_id => 2, :question_id => nil)
 		contest.should_not be_valid
-	  end
-	  
-	  it "its associated winner" do
-	    contest = Contest.new(:winner_id => nil, :loser_id => 2, :question_id => 1)
+	end
+
+	it "its associated winner" do
+		contest = Contest.new(:winner_id => nil, :loser_id => 2, :question_id => 1)
 		contest.should_not be_valid
-	  end
-	  
-	  it "its associated loser" do
-	    contest = Contest.new(:winner_id => 1, :loser_id => nil, :question_id => 1)
+	end
+
+	it "its associated loser" do
+		contest = Contest.new(:winner_id => 1, :loser_id => nil, :question_id => 1)
 		contest.should_not be_valid
-	  end
+	end
   end
   
 

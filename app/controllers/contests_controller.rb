@@ -29,10 +29,11 @@ class ContestsController < ApplicationController
     @range = params[:range] || "1-20"
     @x, @y = @range.split("-").map( &:to_i )
     @records = (@y - @x) + 1
-  if(Contest.first)
-    @first_record = Contest.first.id 
-    @contests = Contest.includes(:question, :winner, :loser).range( @x..@y ).reverse
-  end
+    
+    if(Contest.first)
+      @first_record = Contest.first.id 
+      @contests = Contest.includes(:question, :winner, :loser).range( @x..@y ).reverse
+    end
   
   end
   

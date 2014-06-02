@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all.sort_by { |question| question.text }
-	render "index"
+  render "index"
   end
   
   def show

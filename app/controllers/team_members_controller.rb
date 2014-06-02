@@ -7,7 +7,7 @@ class TeamMembersController < ApplicationController
 	  return redirect_to "/sign-in"
 	end
     
-	@team = TeamMember.includes(:wins, :losses)
+	@team = TeamMember.includes(:wins, :losses).sort { |a,b| a.name <=> b.name }
 	#@biggest_winner = TeamMember.with_most(@team, :wins)
 	#@biggest_loser = TeamMember.with_most(@team, :losses)
 	

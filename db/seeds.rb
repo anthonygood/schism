@@ -39,6 +39,8 @@ names = %w[
 	Bianca\ Esmero
 	Satoru\ Tanabe
 	Kati\ Vorobjova
+	Takeyoshi\ Mizusawa
+	Yuki\ Naotori
 ]
 
 names.each do |person|
@@ -48,8 +50,9 @@ end
 
 TeamMember.find_by_name("Masatomo Nakano").update_attribute(:email, "tomo@quipper.com")
 TeamMember.find_by_name("Masayuki Watanabe").update_attribute(:email, "masa@quipper.com")
+TeamMember.find_by_name("Takeyoshi Mizusawa").update_attribute(:email, "take@quipper.com")
 
-team_portraits = ["Akalpa Acharya.png", "Akifumi Yokoi.png", "Anthony Good.jpg", "Bianca Esmero.png", "Daisuke Fujimura.png", "Eri Nishihara.png", "Flavio Zanda.png", "Joseph Ganderson.JPG", "Kazuyuki Honda.png", "Keisuke Kawase.png", "Kensuke Nagae.png", "Kohei Hasegawa.png", "Koutaro Chikuba.png", "Mai Ueno.png", "Masatomo Nakano.jpg", "Masayuki Watanabe.jpg", "Matthew Platts.png", "Omar Sahyoun.png","Roxana Rudareanu.png", "Ryan Guerrero.png", "Seth Jeffery.png", "Takeshi Sasaki.png", "Takeshi Ugajin.png", "Takuya Homma.png", "Tomoko Matsukawa.png", "Wis Amarasinghe.jpg", "Yosuke Arakaki.png", "Yuki Miyauchi.png", "Yusuke Kaneko.png", "Yuta Funase.png", "Satoru Tanabe.jpg", "Kati Vorobjova.png" ]
+team_portraits = ["Akalpa Acharya.png", "Akifumi Yokoi.png", "Anthony Good.jpg", "Bianca Esmero.png", "Daisuke Fujimura.png", "Eri Nishihara.png", "Flavio Zanda.png", "Joseph Ganderson.JPG", "Kazuyuki Honda.png", "Keisuke Kawase.png", "Kensuke Nagae.png", "Kohei Hasegawa.png", "Koutaro Chikuba.png", "Mai Ueno.png", "Masatomo Nakano.jpg", "Masayuki Watanabe.jpg", "Matthew Platts.png", "Omar Sahyoun.png","Roxana Rudareanu.png", "Ryan Guerrero.png", "Seth Jeffery.png", "Takeshi Sasaki.png", "Takeshi Ugajin.png", "Takuya Homma.png", "Tomoko Matsukawa.png", "Wis Amarasinghe.jpg", "Yosuke Arakaki.png", "Yuki Miyauchi.png", "Yusuke Kaneko.png", "Yuta Funase.png", "Satoru Tanabe.jpg", "Kati Vorobjova.png", "Takeyoshi Mizusawa.png", "Yuki Naotori.png" ]
 
 team_portraits.each do |image_name|
   person_name = image_name.split(".")[0]

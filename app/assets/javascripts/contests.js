@@ -51,12 +51,12 @@ $(document).ready( function(){
 	$medallions.css({'border-width': '50px'});
 	
 	//hide the buttons at first
-	$('.btn').css("opacity", "0");
+	$('.btn.contest').css("opacity", "0");
 	
 	//now spin and zoom the medallions
 	//and reveal the buttons after
 	zoom($medallions, function(){
-		$('.btn').css("opacity", "1");
+		$('.btn.contest').css("opacity", "1");
 	});
 	
 	//hide the #question
